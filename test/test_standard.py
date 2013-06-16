@@ -89,6 +89,15 @@ class TestOpenAtomic(unittest.TestCase):
             self.assertTrue(f.aborted)
             self.assertTrue(f.closed)
 
+    def test_close(self):
+        with open_atomic(self.testfile) as f:
+            f.write("Hello, world!")
+            self.assertEqual(f.name, f.temp_name)
+            f.close()
+            self.assertEqual(f.name, f.target_name)
+            self.assertFalse(f.aborted)
+            self.assertTrue(f.closed)
+
     def test_close_fails(self):
         with open_atomic(self.testfile) as f:
             os.remove(f.temp_name)
