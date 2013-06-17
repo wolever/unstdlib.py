@@ -37,7 +37,7 @@ class TestOpenAtomic(unittest.TestCase):
 
     def setUp(self):
         self.testfile = os.path.join(tempfile.gettempdir(),
-                                     "unstdlib-atmoicopen-test")
+                                     "unstdlib-open_atomic-test")
         self.rmtestfile()
 
     def tearDown(self):
