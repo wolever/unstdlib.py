@@ -110,7 +110,7 @@ class TestOpenAtomic(unittest.TestCase):
             self.assertTrue(f.closed)
 
     def test_file_operations(self):
-        with open_atomic(self.testfile, open_func=io.open,
+        with open_atomic(self.testfile, opener=io.open,
                         encoding="utf-8", mode="w+") as f:
             f.write(u"\u1234")
             f.seek(0)
