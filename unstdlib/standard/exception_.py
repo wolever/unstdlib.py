@@ -1,5 +1,6 @@
 import sys
 
+from unstdlib.six import reraise
 
 __all__ = ['convert_exception']
 
@@ -25,7 +26,7 @@ def convert_exception(from_exception, to_exception, *to_args, **to_kw):
 
     try:
         throw_foo()
-    except BarError, e:
+    except BarError as e:
         assert e.message == 'bar'
     """
     def wrapper(fn):
@@ -33,8 +34,8 @@ def convert_exception(from_exception, to_exception, *to_args, **to_kw):
         def fn_new(*args, **kw):
             try:
                 return fn(*args, **kw)
-            except from_exception, e:
-                raise to_exception(*to_args, **to_kw), None, sys.exc_info()[2]
+            except from_exception:
+                reraise(to_exception(*to_args, **to_kw), None, sys.exc_info()[2])
 
         fn_new.__doc__ = fn.__doc__
         return fn_new
