@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>unstdlib.formencode &mdash; unstdlib 1.6.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.6.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="unstdlib 1.6.1 documentation" href="../../index.html" />
+    <link rel="up" title="Module code" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">unstdlib 1.6.1 documentation</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for unstdlib.formencode</h1><div class="highlight"><pre>
+<div class="viewcode-block" id="validate"><a class="viewcode-back" href="../../unstdlib.html#unstdlib.formencode.validate">[docs]</a><span class="k">def</span> <span class="nf">validate</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">validator</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Validate a single value in ``d`` using a formencode validator.</span>
+
+<span class="sd">    Example::</span>
+
+<span class="sd">        email = validate(request.params, &#39;email&#39;, validators.Email(not_empty=True))</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">validator</span><span class="o">.</span><span class="n">to_python</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">))</span>
+
+</div>
+<div class="viewcode-block" id="validate_many"><a class="viewcode-back" href="../../unstdlib.html#unstdlib.formencode.validate_many">[docs]</a><span class="k">def</span> <span class="nf">validate_many</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">schema</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Validate a dictionary of data against the provided schema.</span>
+
+<span class="sd">    Returns a list of values positioned in the same order as given in ``schema``, each</span>
+<span class="sd">    value is validated with the corresponding validator. Raises formencode.Invalid if</span>
+<span class="sd">    validation failed.</span>
+
+<span class="sd">    Similar to get_many but using formencode validation.</span>
+
+<span class="sd">    :param d: A dictionary of data to read values from.</span>
+<span class="sd">    :param schema: A list of (key, validator) tuples. The key will be used to fetch</span>
+<span class="sd">        a value from ``d`` and the validator will be applied to it.</span>
+
+<span class="sd">    Example::</span>
+
+<span class="sd">        from formencode import validators</span>
+
+<span class="sd">        email, password, password_confirm = validate_many(request.params, [</span>
+<span class="sd">            (&#39;email&#39;, validators.Email(not_empty=True)),</span>
+<span class="sd">            (&#39;password&#39;, validators.String(min=4)),</span>
+<span class="sd">            (&#39;password_confirm&#39;, validators.String(min=4)),</span>
+<span class="sd">        ])</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">validator</span><span class="o">.</span><span class="n">to_python</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">),</span> <span class="n">state</span><span class="o">=</span><span class="n">key</span><span class="p">)</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span><span class="n">validator</span> <span class="ow">in</span> <span class="n">schema</span><span class="p">]</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">unstdlib 1.6.1 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Andrey Petrov and David Wolever.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

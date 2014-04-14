@@ -1,0 +1,148 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>unstdlib.standard.exception_ &mdash; unstdlib 1.6.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '1.6.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="unstdlib 1.6.1 documentation" href="../../../index.html" />
+    <link rel="up" title="Module code" href="../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">unstdlib 1.6.1 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for unstdlib.standard.exception_</h1><div class="highlight"><pre>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="kn">from</span> <span class="nn">unstdlib.six</span> <span class="kn">import</span> <span class="n">reraise</span><span class="p">,</span> <span class="n">PY3</span>
+
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;convert_exception&#39;</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="convert_exception"><a class="viewcode-back" href="../../../unstdlib.standard.html#unstdlib.standard.exception_.convert_exception">[docs]</a><span class="k">def</span> <span class="nf">convert_exception</span><span class="p">(</span><span class="n">from_exception</span><span class="p">,</span> <span class="n">to_exception</span><span class="p">,</span> <span class="o">*</span><span class="n">to_args</span><span class="p">,</span> <span class="o">**</span><span class="n">to_kw</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Decorator: Catch exception ``from_exception`` and instead raise ``to_exception(*to_args, **to_kw)``.</span>
+
+<span class="sd">    Useful when modules you&#39;re using in a method throw their own errors that you want to</span>
+<span class="sd">    convert to your own exceptions that you handle higher in the stack.</span>
+
+<span class="sd">    Example: ::</span>
+
+<span class="sd">        class FooError(Exception):</span>
+<span class="sd">            pass</span>
+
+<span class="sd">        class BarError(Exception):</span>
+<span class="sd">            def __init__(self, message):</span>
+<span class="sd">                self.message = message</span>
+
+<span class="sd">        @convert_exception(FooError, BarError, message=&#39;bar&#39;)</span>
+<span class="sd">        def throw_foo():</span>
+<span class="sd">            raise FooError(&#39;foo&#39;)</span>
+
+<span class="sd">        try:</span>
+<span class="sd">            throw_foo()</span>
+<span class="sd">        except BarError as e:</span>
+<span class="sd">            assert e.message == &#39;bar&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="n">fn</span><span class="p">):</span>
+
+        <span class="k">def</span> <span class="nf">fn_new</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">fn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
+            <span class="k">except</span> <span class="n">from_exception</span><span class="p">:</span>
+                <span class="n">new_exception</span> <span class="o">=</span> <span class="n">to_exception</span><span class="p">(</span><span class="o">*</span><span class="n">to_args</span><span class="p">,</span> <span class="o">**</span><span class="n">to_kw</span><span class="p">)</span>
+                <span class="n">traceback</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()[</span><span class="mi">2</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">PY3</span><span class="p">:</span>
+                    <span class="n">value</span> <span class="o">=</span> <span class="n">new_exception</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">value</span> <span class="o">=</span> <span class="bp">None</span>
+                <span class="n">reraise</span><span class="p">(</span><span class="n">new_exception</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">traceback</span><span class="p">)</span>
+
+        <span class="n">fn_new</span><span class="o">.</span><span class="n">__doc__</span> <span class="o">=</span> <span class="n">fn</span><span class="o">.</span><span class="n">__doc__</span>
+        <span class="k">return</span> <span class="n">fn_new</span>
+
+    <span class="k">return</span> <span class="n">wrapper</span>
+
+</div>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">doctest</span>
+    <span class="n">doctest</span><span class="o">.</span><span class="n">testmod</span><span class="p">(</span><span class="n">optionflags</span><span class="o">=</span><span class="n">doctest</span><span class="o">.</span><span class="n">ELLIPSIS</span><span class="p">)</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">unstdlib 1.6.1 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Andrey Petrov and David Wolever.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

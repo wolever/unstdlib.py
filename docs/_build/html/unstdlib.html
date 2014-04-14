@@ -1,0 +1,372 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>unstdlib package &mdash; unstdlib 1.6.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.6.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="unstdlib 1.6.1 documentation" href="index.html" />
+    <link rel="next" title="unstdlib.standard package" href="unstdlib.standard.html" />
+    <link rel="prev" title="Welcome to unstdlib’s documentation!" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="unstdlib.standard.html" title="unstdlib.standard package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to unstdlib’s documentation!"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">unstdlib 1.6.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="unstdlib-package">
+<h1>unstdlib package<a class="headerlink" href="#unstdlib-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="unstdlib.standard.html">unstdlib.standard package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="unstdlib.standard.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unstdlib.standard.html#module-unstdlib.standard.collections_">unstdlib.standard.collections_ module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unstdlib.standard.html#module-unstdlib.standard.contextlib_">unstdlib.standard.contextlib_ module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unstdlib.standard.html#module-unstdlib.standard.datetime_">unstdlib.standard.datetime_ module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unstdlib.standard.html#module-unstdlib.standard.dict_">unstdlib.standard.dict_ module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unstdlib.standard.html#module-unstdlib.standard.exception_">unstdlib.standard.exception_ module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unstdlib.standard.html#module-unstdlib.standard.functools_">unstdlib.standard.functools_ module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unstdlib.standard.html#module-unstdlib.standard.list_">unstdlib.standard.list_ module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unstdlib.standard.html#module-unstdlib.standard.os_">unstdlib.standard.os_ module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unstdlib.standard.html#module-unstdlib.standard.random_">unstdlib.standard.random_ module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unstdlib.standard.html#module-unstdlib.standard.string_">unstdlib.standard.string_ module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unstdlib.standard.html#module-unstdlib.standard.type_">unstdlib.standard.type_ module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unstdlib.standard.html#module-unstdlib.standard">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-unstdlib.formencode">
+<span id="unstdlib-formencode-module"></span><h2>unstdlib.formencode module<a class="headerlink" href="#module-unstdlib.formencode" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="unstdlib.formencode.validate">
+<tt class="descclassname">unstdlib.formencode.</tt><tt class="descname">validate</tt><big>(</big><em>d</em>, <em>key</em>, <em>validator</em><big>)</big><a class="reference internal" href="_modules/unstdlib/formencode.html#validate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unstdlib.formencode.validate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Validate a single value in <tt class="docutils literal"><span class="pre">d</span></tt> using a formencode validator.</p>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">email</span> <span class="o">=</span> <span class="n">validate</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">params</span><span class="p">,</span> <span class="s">&#39;email&#39;</span><span class="p">,</span> <span class="n">validators</span><span class="o">.</span><span class="n">Email</span><span class="p">(</span><span class="n">not_empty</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="unstdlib.formencode.validate_many">
+<tt class="descclassname">unstdlib.formencode.</tt><tt class="descname">validate_many</tt><big>(</big><em>d</em>, <em>schema</em><big>)</big><a class="reference internal" href="_modules/unstdlib/formencode.html#validate_many"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unstdlib.formencode.validate_many" title="Permalink to this definition">¶</a></dt>
+<dd><p>Validate a dictionary of data against the provided schema.</p>
+<p>Returns a list of values positioned in the same order as given in <tt class="docutils literal"><span class="pre">schema</span></tt>, each
+value is validated with the corresponding validator. Raises formencode.Invalid if
+validation failed.</p>
+<p>Similar to get_many but using formencode validation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>d</strong> &#8211; A dictionary of data to read values from.</li>
+<li><strong>schema</strong> &#8211; A list of (key, validator) tuples. The key will be used to fetch
+a value from <tt class="docutils literal"><span class="pre">d</span></tt> and the validator will be applied to it.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">formencode</span> <span class="kn">import</span> <span class="n">validators</span>
+
+<span class="n">email</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> <span class="n">password_confirm</span> <span class="o">=</span> <span class="n">validate_many</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">params</span><span class="p">,</span> <span class="p">[</span>
+    <span class="p">(</span><span class="s">&#39;email&#39;</span><span class="p">,</span> <span class="n">validators</span><span class="o">.</span><span class="n">Email</span><span class="p">(</span><span class="n">not_empty</span><span class="o">=</span><span class="bp">True</span><span class="p">)),</span>
+    <span class="p">(</span><span class="s">&#39;password&#39;</span><span class="p">,</span> <span class="n">validators</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">4</span><span class="p">)),</span>
+    <span class="p">(</span><span class="s">&#39;password_confirm&#39;</span><span class="p">,</span> <span class="n">validators</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">4</span><span class="p">)),</span>
+<span class="p">])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="module-unstdlib.html">
+<span id="unstdlib-html-module"></span><h2>unstdlib.html module<a class="headerlink" href="#module-unstdlib.html" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="unstdlib.html.get_cache_buster">
+<tt class="descclassname">unstdlib.html.</tt><tt class="descname">get_cache_buster</tt><big>(</big><em>src_path</em>, <em>method='importtime'</em><big>)</big><a class="reference internal" href="_modules/unstdlib/html.html#get_cache_buster"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unstdlib.html.get_cache_buster" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a string that can be used as a parameter for cache-busting URLs
+for this asset.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>src_path</strong> &#8211; Filesystem path to the file we&#8217;re generating a cache-busting value for.</li>
+<li><strong>method</strong> &#8211; Method for cache-busting. Supported values: importtime, mtime, md5
+The default is &#8216;importtime&#8217;, because it requires the least processing.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Note that the mtime and md5 cache busting methods&#8217; results are cached on
+the src_path.</p>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">SRC_PATH</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">__file__</span><span class="p">),</span> <span class="s">&#39;html.py&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">get_cache_buster</span><span class="p">(</span><span class="n">SRC_PATH</span><span class="p">)</span> <span class="ow">is</span> <span class="n">_IMPORT_TIME</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">get_cache_buster</span><span class="p">(</span><span class="n">SRC_PATH</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s">&#39;mtime&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">_cache_key_by_mtime</span><span class="p">(</span><span class="n">SRC_PATH</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">get_cache_buster</span><span class="p">(</span><span class="n">SRC_PATH</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s">&#39;md5&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">_cache_key_by_md5</span><span class="p">(</span><span class="n">SRC_PATH</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="unstdlib.html.literal">
+<em class="property">class </em><tt class="descclassname">unstdlib.html.</tt><tt class="descname">literal</tt><a class="reference internal" href="_modules/unstdlib/html.html#literal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unstdlib.html.literal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">markupsafe.Markup</span></tt></p>
+<p>Wrapper type which represents an HTML literal that does not need to be
+escaped. Will use <cite>MarkupSafe</cite> if available, otherwise it&#8217;s a dumb
+unicode-like object.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="unstdlib.html.tag">
+<tt class="descclassname">unstdlib.html.</tt><tt class="descname">tag</tt><big>(</big><em>tagname</em>, <em>content=''</em>, <em>attrs=None</em><big>)</big><a class="reference internal" href="_modules/unstdlib/html.html#tag"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unstdlib.html.tag" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper for programmatically building HTML tags.</p>
+<p>Note that this barely does any escaping, and will happily spit out
+dangerous user input if used as such.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>tagname</strong> &#8211; Tag name of the DOM element we want to return.</li>
+<li><strong>content</strong> &#8211; Optional content of the DOM element. If <cite>None</cite>, then the element is
+self-closed. By default, the content is an empty string.</li>
+<li><strong>attrs</strong> &#8211; Optional dictionary-like collection of attributes for the DOM element.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">tag</span><span class="p">(</span><span class="s">&#39;div&#39;</span><span class="p">,</span> <span class="n">content</span><span class="o">=</span><span class="s">&#39;Hello, world.&#39;</span><span class="p">)</span>
+<span class="go">u&#39;&lt;div&gt;Hello, world.&lt;/div&gt;&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tag</span><span class="p">(</span><span class="s">&#39;script&#39;</span><span class="p">,</span> <span class="n">attrs</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;src&#39;</span><span class="p">:</span> <span class="s">&#39;/static/js/core.js&#39;</span><span class="p">})</span>
+<span class="go">u&#39;&lt;script src=&quot;/static/js/core.js&quot;&gt;&lt;/script&gt;&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tag</span><span class="p">(</span><span class="s">&#39;script&#39;</span><span class="p">,</span> <span class="n">attrs</span><span class="o">=</span><span class="p">[(</span><span class="s">&#39;src&#39;</span><span class="p">,</span> <span class="s">&#39;/static/js/core.js&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s">&#39;type&#39;</span><span class="p">,</span> <span class="s">&#39;text/javascript&#39;</span><span class="p">)])</span>
+<span class="go">u&#39;&lt;script src=&quot;/static/js/core.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tag</span><span class="p">(</span><span class="s">&#39;meta&#39;</span><span class="p">,</span> <span class="n">content</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">attrs</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="s">&#39;&quot;quotedquotes&quot;&#39;</span><span class="p">))</span>
+<span class="go">u&#39;&lt;meta content=&quot;\\&quot;quotedquotes\\&quot;&quot; /&gt;&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="unstdlib.html.javascript_link">
+<tt class="descclassname">unstdlib.html.</tt><tt class="descname">javascript_link</tt><big>(</big><em>src_url</em>, <em>src_path=None</em>, <em>cache_bust=None</em>, <em>content=''</em>, <em>extra_attrs=None</em><big>)</big><a class="reference internal" href="_modules/unstdlib/html.html#javascript_link"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unstdlib.html.javascript_link" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper for programmatically building HTML JavaScript source include
+links, with optional cache busting.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>src_url</strong> &#8211; Goes into the <cite>src</cite> attribute of the <cite>&lt;script src=&#8221;...&#8221;&gt;</cite> tag.</li>
+<li><strong>src_path</strong> &#8211; Optional filesystem path to the source file, used when <cite>cache_bust</cite> is
+enabled.</li>
+<li><strong>content</strong> &#8211; Optional content of the DOM element. If <cite>None</cite>, then the element is
+self-closed.</li>
+<li><strong>cache_bust</strong> &#8211; Optional method to use for cache busting. Can be one of: importtime,
+md5, or mtime. If the value is md5 or mtime, then <cite>src_path</cite> must be
+supplied.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">javascript_link</span><span class="p">(</span><span class="s">&#39;/static/js/core.js&#39;</span><span class="p">)</span>
+<span class="go">u&#39;&lt;script src=&quot;/static/js/core.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="unstdlib.html.stylesheet_link">
+<tt class="descclassname">unstdlib.html.</tt><tt class="descname">stylesheet_link</tt><big>(</big><em>src_url</em>, <em>src_path=None</em>, <em>cache_bust=None</em>, <em>content=''</em>, <em>extra_attrs=None</em><big>)</big><a class="reference internal" href="_modules/unstdlib/html.html#stylesheet_link"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unstdlib.html.stylesheet_link" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper for programmatically building HTML StyleSheet source include
+links, with optional cache busting.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>src_url</strong> &#8211; Goes into the <cite>src</cite> attribute of the <cite>&lt;link src=&#8221;...&#8221;&gt;</cite> tag.</li>
+<li><strong>src_path</strong> &#8211; Optional filesystem path to the source file, used when <cite>cache_bust</cite> is
+enabled.</li>
+<li><strong>content</strong> &#8211; Optional content of the DOM element. If <cite>None</cite>, then the element is
+self-closed.</li>
+<li><strong>cache_bust</strong> &#8211; Optional method to use for cache busting. Can be one of: importtime,
+md5, or mtime. If the value is md5 or mtime, then <cite>src_path</cite> must be
+supplied.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">stylesheet_link</span><span class="p">(</span><span class="s">&#39;/static/css/media.css&#39;</span><span class="p">)</span>
+<span class="go">u&#39;&lt;link href=&quot;/static/css/media.css&quot; rel=&quot;stylesheet&quot;&gt;&lt;/link&gt;&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="unstdlib.html.html_tag">
+<tt class="descclassname">unstdlib.html.</tt><tt class="descname">html_tag</tt><big>(</big><em>*args</em>, <em>**kw</em><big>)</big><a class="reference internal" href="_modules/unstdlib/html.html#html_tag"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unstdlib.html.html_tag" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function has been renamed to <cite>tag</cite>. Use that instead.
+Backwards-compatibility will be removed in v1.6.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="unstdlib.html.html_javascript_link">
+<tt class="descclassname">unstdlib.html.</tt><tt class="descname">html_javascript_link</tt><big>(</big><em>*args</em>, <em>**kw</em><big>)</big><a class="reference internal" href="_modules/unstdlib/html.html#html_javascript_link"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unstdlib.html.html_javascript_link" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function has been renamed to <cite>javascript_link</cite>. Use that instead.
+Backwards-compatibility will be removed in v1.6.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="unstdlib.html.html_stylesheet_link">
+<tt class="descclassname">unstdlib.html.</tt><tt class="descname">html_stylesheet_link</tt><big>(</big><em>*args</em>, <em>**kw</em><big>)</big><a class="reference internal" href="_modules/unstdlib/html.html#html_stylesheet_link"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unstdlib.html.html_stylesheet_link" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function has been renamed to <cite>stylesheet_link</cite>. Use that instead.
+Backwards-compatibility will be removed in v1.6.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-unstdlib.sqlalchemy">
+<span id="unstdlib-sqlalchemy-module"></span><h2>unstdlib.sqlalchemy module<a class="headerlink" href="#module-unstdlib.sqlalchemy" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="unstdlib.sqlalchemy.enumerate_query_by_limit">
+<tt class="descclassname">unstdlib.sqlalchemy.</tt><tt class="descname">enumerate_query_by_limit</tt><big>(</big><em>q</em>, <em>limit=1000</em><big>)</big><a class="reference internal" href="_modules/unstdlib/sqlalchemy.html#enumerate_query_by_limit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unstdlib.sqlalchemy.enumerate_query_by_limit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Enumerate over SQLAlchemy query object <tt class="docutils literal"><span class="pre">q</span></tt> and yield individual results
+fetched in batches of size <tt class="docutils literal"><span class="pre">limit</span></tt> using SQL LIMIT and OFFSET.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-unstdlib">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-unstdlib" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">unstdlib package</a><ul>
+<li><a class="reference internal" href="#subpackages">Subpackages</a></li>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-unstdlib.formencode">unstdlib.formencode module</a></li>
+<li><a class="reference internal" href="#module-unstdlib.html">unstdlib.html module</a></li>
+<li><a class="reference internal" href="#module-unstdlib.sqlalchemy">unstdlib.sqlalchemy module</a></li>
+<li><a class="reference internal" href="#module-unstdlib">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Welcome to unstdlib&#8217;s documentation!</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="unstdlib.standard.html"
+                        title="next chapter">unstdlib.standard package</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/unstdlib.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="unstdlib.standard.html" title="unstdlib.standard package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to unstdlib’s documentation!"
+             >previous</a> |</li>
+        <li><a href="index.html">unstdlib 1.6.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Andrey Petrov and David Wolever.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

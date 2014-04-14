@@ -1,0 +1,345 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>unstdlib.html &mdash; unstdlib 1.6.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.6.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="unstdlib 1.6.1 documentation" href="../../index.html" />
+    <link rel="up" title="Module code" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">unstdlib 1.6.1 documentation</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for unstdlib.html</h1><div class="highlight"><pre>
+<span class="kn">import</span> <span class="nn">os.path</span>
+<span class="kn">import</span> <span class="nn">hashlib</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="kn">from</span> <span class="nn">unstdlib.standard.functools_</span> <span class="kn">import</span> <span class="n">memoized</span>
+<span class="kn">from</span> <span class="nn">unstdlib.standard.list_</span> <span class="kn">import</span> <span class="n">iterate_items</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">markupsafe</span>
+    <span class="n">MarkupType</span> <span class="o">=</span> <span class="n">markupsafe</span><span class="o">.</span><span class="n">Markup</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="n">MarkupType</span> <span class="o">=</span> <span class="nb">unicode</span>
+
+
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s">&#39;get_cache_buster&#39;</span><span class="p">,</span> <span class="s">&#39;literal&#39;</span><span class="p">,</span> <span class="s">&#39;tag&#39;</span><span class="p">,</span> <span class="s">&#39;javascript_link&#39;</span><span class="p">,</span> <span class="s">&#39;stylesheet_link&#39;</span><span class="p">,</span>
+<span class="p">]</span>
+
+
+<span class="nd">@memoized</span>
+<span class="k">def</span> <span class="nf">_cache_key_by_md5</span><span class="p">(</span><span class="n">src_path</span><span class="p">,</span> <span class="n">chunk_size</span><span class="o">=</span><span class="mi">65536</span><span class="p">):</span>
+    <span class="nb">hash</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">md5</span><span class="p">()</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">src_path</span><span class="p">,</span> <span class="s">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="nb">iter</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">65536</span><span class="p">),</span> <span class="s">&#39;&#39;</span><span class="p">):</span>
+            <span class="nb">hash</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">hash</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
+
+
+<span class="nd">@memoized</span>
+<span class="k">def</span> <span class="nf">_cache_key_by_mtime</span><span class="p">(</span><span class="n">src_path</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getmtime</span><span class="p">(</span><span class="n">src_path</span><span class="p">)))</span>
+
+
+<span class="n">_IMPORT_TIME</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()))</span>
+
+<span class="n">_BUST_METHODS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">&#39;mtime&#39;</span><span class="p">:</span> <span class="n">_cache_key_by_mtime</span><span class="p">,</span>
+    <span class="s">&#39;md5&#39;</span><span class="p">:</span> <span class="n">_cache_key_by_md5</span><span class="p">,</span>
+    <span class="s">&#39;importtime&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">src_path</span><span class="p">:</span> <span class="n">_IMPORT_TIME</span><span class="p">,</span>
+<span class="p">}</span>
+
+
+<div class="viewcode-block" id="get_cache_buster"><a class="viewcode-back" href="../../unstdlib.html#unstdlib.html.get_cache_buster">[docs]</a><span class="k">def</span> <span class="nf">get_cache_buster</span><span class="p">(</span><span class="n">src_path</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s">&#39;importtime&#39;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Return a string that can be used as a parameter for cache-busting URLs</span>
+<span class="sd">    for this asset.</span>
+
+<span class="sd">    :param src_path:</span>
+<span class="sd">        Filesystem path to the file we&#39;re generating a cache-busting value for.</span>
+
+<span class="sd">    :param method:</span>
+<span class="sd">        Method for cache-busting. Supported values: importtime, mtime, md5</span>
+<span class="sd">        The default is &#39;importtime&#39;, because it requires the least processing.</span>
+
+<span class="sd">    Note that the mtime and md5 cache busting methods&#39; results are cached on</span>
+<span class="sd">    the src_path.</span>
+
+<span class="sd">    Example::</span>
+
+<span class="sd">        &gt;&gt;&gt; SRC_PATH = os.path.join(os.path.dirname(__file__), &#39;html.py&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; get_cache_buster(SRC_PATH) is _IMPORT_TIME</span>
+<span class="sd">        True</span>
+<span class="sd">        &gt;&gt;&gt; get_cache_buster(SRC_PATH, method=&#39;mtime&#39;) == _cache_key_by_mtime(SRC_PATH)</span>
+<span class="sd">        True</span>
+<span class="sd">        &gt;&gt;&gt; get_cache_buster(SRC_PATH, method=&#39;md5&#39;) == _cache_key_by_md5(SRC_PATH)</span>
+<span class="sd">        True</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">fn</span> <span class="o">=</span> <span class="n">_BUST_METHODS</span><span class="p">[</span><span class="n">method</span><span class="p">]</span>
+    <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s">&#39;Unsupported busting method value: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">method</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">fn</span><span class="p">(</span><span class="n">src_path</span><span class="p">)</span>
+
+</div>
+<span class="k">def</span> <span class="nf">_generate_dom_attrs</span><span class="p">(</span><span class="n">attrs</span><span class="p">,</span> <span class="n">allow_no_value</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Yield compiled DOM attribute key-value strings.</span>
+
+<span class="sd">    If the value is `True`, then it is treated as no-value.&quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">attr</span> <span class="ow">in</span> <span class="n">iterate_items</span><span class="p">(</span><span class="n">attrs</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">attr</span><span class="p">,</span> <span class="nb">basestring</span><span class="p">):</span>
+            <span class="n">attr</span> <span class="o">=</span> <span class="p">(</span><span class="n">attr</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>
+        <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="n">attr</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="bp">True</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">allow_no_value</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">key</span>  <span class="c"># E.g. &lt;option checked=&quot;true&quot; /&gt;</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="bp">True</span><span class="p">:</span>
+            <span class="k">yield</span> <span class="bp">True</span>  <span class="c"># E.g. &lt;option checked /&gt;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">yield</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s">=&quot;</span><span class="si">%s</span><span class="s">&quot;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&#39;&quot;&#39;</span><span class="p">,</span> <span class="s">&#39;</span><span class="se">\\</span><span class="s">&quot;&#39;</span><span class="p">))</span>
+
+
+<div class="viewcode-block" id="literal"><a class="viewcode-back" href="../../unstdlib.html#unstdlib.html.literal">[docs]</a><span class="k">class</span> <span class="nc">literal</span><span class="p">(</span><span class="n">MarkupType</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Wrapper type which represents an HTML literal that does not need to be</span>
+<span class="sd">    escaped. Will use `MarkupSafe` if available, otherwise it&#39;s a dumb</span>
+<span class="sd">    unicode-like object.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__html__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+</div>
+<div class="viewcode-block" id="tag"><a class="viewcode-back" href="../../unstdlib.html#unstdlib.html.tag">[docs]</a><span class="k">def</span> <span class="nf">tag</span><span class="p">(</span><span class="n">tagname</span><span class="p">,</span> <span class="n">content</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">,</span> <span class="n">attrs</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Helper for programmatically building HTML tags.</span>
+
+<span class="sd">    Note that this barely does any escaping, and will happily spit out</span>
+<span class="sd">    dangerous user input if used as such.</span>
+
+<span class="sd">    :param tagname:</span>
+<span class="sd">        Tag name of the DOM element we want to return.</span>
+
+<span class="sd">    :param content:</span>
+<span class="sd">        Optional content of the DOM element. If `None`, then the element is</span>
+<span class="sd">        self-closed. By default, the content is an empty string.</span>
+
+<span class="sd">    :param attrs:</span>
+<span class="sd">        Optional dictionary-like collection of attributes for the DOM element.</span>
+
+<span class="sd">    Example::</span>
+
+<span class="sd">        &gt;&gt;&gt; tag(&#39;div&#39;, content=&#39;Hello, world.&#39;)</span>
+<span class="sd">        u&#39;&lt;div&gt;Hello, world.&lt;/div&gt;&#39;</span>
+<span class="sd">        &gt;&gt;&gt; tag(&#39;script&#39;, attrs={&#39;src&#39;: &#39;/static/js/core.js&#39;})</span>
+<span class="sd">        u&#39;&lt;script src=&quot;/static/js/core.js&quot;&gt;&lt;/script&gt;&#39;</span>
+<span class="sd">        &gt;&gt;&gt; tag(&#39;script&#39;, attrs=[(&#39;src&#39;, &#39;/static/js/core.js&#39;), (&#39;type&#39;, &#39;text/javascript&#39;)])</span>
+<span class="sd">        u&#39;&lt;script src=&quot;/static/js/core.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;&#39;</span>
+<span class="sd">        &gt;&gt;&gt; tag(&#39;meta&#39;, content=None, attrs=dict(content=&#39;&quot;quotedquotes&quot;&#39;))</span>
+<span class="sd">        u&#39;&lt;meta content=&quot;\\\\&quot;quotedquotes\\\\&quot;&quot; /&gt;&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">attrs_str</span> <span class="o">=</span> <span class="n">attrs</span> <span class="ow">and</span> <span class="s">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">_generate_dom_attrs</span><span class="p">(</span><span class="n">attrs</span><span class="p">))</span>
+    <span class="n">open_tag</span> <span class="o">=</span> <span class="n">tagname</span>
+    <span class="k">if</span> <span class="n">attrs_str</span><span class="p">:</span>
+        <span class="n">open_tag</span> <span class="o">+=</span> <span class="s">&#39; &#39;</span> <span class="o">+</span> <span class="n">attrs_str</span>
+    <span class="k">if</span> <span class="n">content</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="nb">basestring</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">literal</span><span class="p">(</span><span class="s">&#39;&lt;</span><span class="si">%s</span><span class="s">&gt;</span><span class="si">%s</span><span class="s">&lt;/</span><span class="si">%s</span><span class="s">&gt;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">open_tag</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="n">tagname</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">literal</span><span class="p">(</span><span class="s">&#39;&lt;</span><span class="si">%s</span><span class="s"> /&gt;&#39;</span> <span class="o">%</span> <span class="n">open_tag</span><span class="p">)</span>
+
+</div>
+<div class="viewcode-block" id="javascript_link"><a class="viewcode-back" href="../../unstdlib.html#unstdlib.html.javascript_link">[docs]</a><span class="k">def</span> <span class="nf">javascript_link</span><span class="p">(</span><span class="n">src_url</span><span class="p">,</span> <span class="n">src_path</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">cache_bust</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">content</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">,</span> <span class="n">extra_attrs</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Helper for programmatically building HTML JavaScript source include</span>
+<span class="sd">    links, with optional cache busting.</span>
+
+<span class="sd">    :param src_url:</span>
+<span class="sd">        Goes into the `src` attribute of the `&lt;script src=&quot;...&quot;&gt;` tag.</span>
+
+<span class="sd">    :param src_path:</span>
+<span class="sd">        Optional filesystem path to the source file, used when `cache_bust` is</span>
+<span class="sd">        enabled.</span>
+
+<span class="sd">    :param content:</span>
+<span class="sd">        Optional content of the DOM element. If `None`, then the element is</span>
+<span class="sd">        self-closed.</span>
+
+<span class="sd">    :param cache_bust:</span>
+<span class="sd">        Optional method to use for cache busting. Can be one of: importtime,</span>
+<span class="sd">        md5, or mtime. If the value is md5 or mtime, then `src_path` must be</span>
+<span class="sd">        supplied.</span>
+
+
+<span class="sd">    Example::</span>
+
+<span class="sd">        &gt;&gt;&gt; javascript_link(&#39;/static/js/core.js&#39;)</span>
+<span class="sd">        u&#39;&lt;script src=&quot;/static/js/core.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">cache_bust</span><span class="p">:</span>
+        <span class="n">append_suffix</span> <span class="o">=</span> <span class="n">get_cache_buster</span><span class="p">(</span><span class="n">src_path</span><span class="o">=</span><span class="n">src_path</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="n">cache_bust</span><span class="p">)</span>
+        <span class="n">delim</span> <span class="o">=</span> <span class="s">&#39;&amp;&#39;</span> <span class="k">if</span> <span class="s">&#39;?&#39;</span> <span class="ow">in</span> <span class="n">src_url</span> <span class="k">else</span> <span class="s">&#39;?&#39;</span>
+        <span class="n">src_url</span> <span class="o">+=</span> <span class="n">delim</span> <span class="o">+</span> <span class="n">append_suffix</span>
+
+    <span class="n">attrs</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s">&#39;src&#39;</span><span class="p">:</span> <span class="n">src_url</span><span class="p">,</span>
+        <span class="s">&#39;type&#39;</span><span class="p">:</span> <span class="s">&#39;text/javascript&#39;</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="n">extra_attrs</span><span class="p">:</span>
+        <span class="n">attrs</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">extra_attrs</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">tag</span><span class="p">(</span><span class="s">&#39;script&#39;</span><span class="p">,</span> <span class="n">content</span><span class="o">=</span><span class="n">content</span><span class="p">,</span> <span class="n">attrs</span><span class="o">=</span><span class="n">attrs</span><span class="p">)</span>
+
+</div>
+<div class="viewcode-block" id="stylesheet_link"><a class="viewcode-back" href="../../unstdlib.html#unstdlib.html.stylesheet_link">[docs]</a><span class="k">def</span> <span class="nf">stylesheet_link</span><span class="p">(</span><span class="n">src_url</span><span class="p">,</span> <span class="n">src_path</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">cache_bust</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">content</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">,</span> <span class="n">extra_attrs</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Helper for programmatically building HTML StyleSheet source include</span>
+<span class="sd">    links, with optional cache busting.</span>
+
+<span class="sd">    :param src_url:</span>
+<span class="sd">        Goes into the `src` attribute of the `&lt;link src=&quot;...&quot;&gt;` tag.</span>
+
+<span class="sd">    :param src_path:</span>
+<span class="sd">        Optional filesystem path to the source file, used when `cache_bust` is</span>
+<span class="sd">        enabled.</span>
+
+<span class="sd">    :param content:</span>
+<span class="sd">        Optional content of the DOM element. If `None`, then the element is</span>
+<span class="sd">        self-closed.</span>
+
+<span class="sd">    :param cache_bust:</span>
+<span class="sd">        Optional method to use for cache busting. Can be one of: importtime,</span>
+<span class="sd">        md5, or mtime. If the value is md5 or mtime, then `src_path` must be</span>
+<span class="sd">        supplied.</span>
+
+
+<span class="sd">    Example::</span>
+
+<span class="sd">        &gt;&gt;&gt; stylesheet_link(&#39;/static/css/media.css&#39;)</span>
+<span class="sd">        u&#39;&lt;link href=&quot;/static/css/media.css&quot; rel=&quot;stylesheet&quot;&gt;&lt;/link&gt;&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">cache_bust</span><span class="p">:</span>
+        <span class="n">append_suffix</span> <span class="o">=</span> <span class="n">get_cache_buster</span><span class="p">(</span><span class="n">src_path</span><span class="o">=</span><span class="n">src_path</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="n">cache_bust</span><span class="p">)</span>
+        <span class="n">delim</span> <span class="o">=</span> <span class="s">&#39;&amp;&#39;</span> <span class="k">if</span> <span class="s">&#39;?&#39;</span> <span class="ow">in</span> <span class="n">src_url</span> <span class="k">else</span> <span class="s">&#39;?&#39;</span>
+        <span class="n">src_url</span> <span class="o">+=</span> <span class="n">delim</span> <span class="o">+</span> <span class="n">append_suffix</span>
+
+    <span class="n">attrs</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s">&#39;href&#39;</span><span class="p">:</span> <span class="n">src_url</span><span class="p">,</span>
+        <span class="s">&#39;rel&#39;</span><span class="p">:</span> <span class="s">&#39;stylesheet&#39;</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="n">extra_attrs</span><span class="p">:</span>
+        <span class="n">attrs</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">extra_attrs</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">tag</span><span class="p">(</span><span class="s">&#39;link&#39;</span><span class="p">,</span> <span class="n">content</span><span class="o">=</span><span class="n">content</span><span class="p">,</span> <span class="n">attrs</span><span class="o">=</span><span class="n">attrs</span><span class="p">)</span>
+
+
+<span class="c">### Backwards compatibility (will be removed in v1.6):</span></div>
+<span class="n">__all__</span> <span class="o">+=</span> <span class="p">[</span><span class="s">&#39;html_tag&#39;</span><span class="p">,</span> <span class="s">&#39;html_javascript_link&#39;</span><span class="p">,</span> <span class="s">&#39;html_stylesheet_link&#39;</span><span class="p">]</span>
+
+<span class="kn">import</span> <span class="nn">warnings</span>
+
+<div class="viewcode-block" id="html_tag"><a class="viewcode-back" href="../../unstdlib.html#unstdlib.html.html_tag">[docs]</a><span class="k">def</span> <span class="nf">html_tag</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    This function has been renamed to `tag`. Use that instead.</span>
+<span class="sd">    Backwards-compatibility will be removed in v1.6.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s">&quot;Renamed to `tag`&quot;</span><span class="p">,</span> <span class="ne">DeprecationWarning</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">tag</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
+
+</div>
+<div class="viewcode-block" id="html_javascript_link"><a class="viewcode-back" href="../../unstdlib.html#unstdlib.html.html_javascript_link">[docs]</a><span class="k">def</span> <span class="nf">html_javascript_link</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    This function has been renamed to `javascript_link`. Use that instead.</span>
+<span class="sd">    Backwards-compatibility will be removed in v1.6.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s">&quot;Renamed to `javascript_link`&quot;</span><span class="p">,</span> <span class="ne">DeprecationWarning</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">javascript_link</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
+
+</div>
+<div class="viewcode-block" id="html_stylesheet_link"><a class="viewcode-back" href="../../unstdlib.html#unstdlib.html.html_stylesheet_link">[docs]</a><span class="k">def</span> <span class="nf">html_stylesheet_link</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    This function has been renamed to `stylesheet_link`. Use that instead.</span>
+<span class="sd">    Backwards-compatibility will be removed in v1.6.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s">&quot;Renamed to `stylesheet_link`&quot;</span><span class="p">,</span> <span class="ne">DeprecationWarning</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">stylesheet_link</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
+
+</div>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">doctest</span>
+    <span class="n">doctest</span><span class="o">.</span><span class="n">testmod</span><span class="p">(</span><span class="n">optionflags</span><span class="o">=</span><span class="n">doctest</span><span class="o">.</span><span class="n">ELLIPSIS</span><span class="p">)</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">unstdlib 1.6.1 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Andrey Petrov and David Wolever.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

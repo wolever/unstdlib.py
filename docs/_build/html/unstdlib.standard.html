@@ -1,0 +1,960 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>unstdlib.standard package &mdash; unstdlib 1.6.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.6.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="unstdlib 1.6.1 documentation" href="index.html" />
+    <link rel="up" title="unstdlib package" href="unstdlib.html" />
+    <link rel="prev" title="unstdlib package" href="unstdlib.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="unstdlib.html" title="unstdlib package"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">unstdlib 1.6.1 documentation</a> &raquo;</li>
+          <li><a href="unstdlib.html" accesskey="U">unstdlib package</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="unstdlib-standard-package">
+<h1>unstdlib.standard package<a class="headerlink" href="#unstdlib-standard-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-unstdlib.standard.collections_">
+<span id="unstdlib-standard-collections-module"></span><h2>unstdlib.standard.collections_ module<a class="headerlink" href="#module-unstdlib.standard.collections_" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="unstdlib.standard.collections_.RecentlyUsedContainer">
+<em class="property">class </em><tt class="descclassname">unstdlib.standard.collections_.</tt><tt class="descname">RecentlyUsedContainer</tt><big>(</big><em>maxsize=10</em>, <em>dispose_func=None</em><big>)</big><a class="reference internal" href="_modules/unstdlib/standard/collections_.html#RecentlyUsedContainer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unstdlib.standard.collections_.RecentlyUsedContainer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">_abcoll.MutableMapping</span></tt></p>
+<p>Provides a thread-safe dict-like container which maintains up to
+<tt class="docutils literal"><span class="pre">maxsize</span></tt> keys while throwing away the least-recently-used keys beyond
+<tt class="docutils literal"><span class="pre">maxsize</span></tt>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>maxsize</strong> &#8211; Maximum number of recent elements to retain.</li>
+<li><strong>dispose_func</strong> &#8211; Every time an item is evicted from the container,
+<tt class="docutils literal"><span class="pre">dispose_func(value)</span></tt> is called.  Callback which will get called</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="unstdlib.standard.collections_.RecentlyUsedContainer.ContainerCls">
+<tt class="descname">ContainerCls</tt><a class="headerlink" href="#unstdlib.standard.collections_.RecentlyUsedContainer.ContainerCls" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <tt class="xref py py-class docutils literal"><span class="pre">OrderedDict</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="unstdlib.standard.collections_.RecentlyUsedContainer.clear">
+<tt class="descname">clear</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/unstdlib/standard/collections_.html#RecentlyUsedContainer.clear"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unstdlib.standard.collections_.RecentlyUsedContainer.clear" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="unstdlib.standard.collections_.RecentlyUsedContainer.keys">
+<tt class="descname">keys</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/unstdlib/standard/collections_.html#RecentlyUsedContainer.keys"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unstdlib.standard.collections_.RecentlyUsedContainer.keys" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-unstdlib.standard.contextlib_">
+<span id="unstdlib-standard-contextlib-module"></span><h2>unstdlib.standard.contextlib_ module<a class="headerlink" href="#module-unstdlib.standard.contextlib_" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="unstdlib.standard.contextlib_.open_atomic">
+<em class="property">class </em><tt class="descclassname">unstdlib.standard.contextlib_.</tt><tt class="descname">open_atomic</tt><big>(</big><em>name</em>, <em>prefix='.'</em>, <em>suffix='.temp'</em>, <em>dir=None</em>, <em>mode='w'</em>, <em>opener=&lt;built-in function open&gt;</em>, <em>**open_args</em><big>)</big><a class="reference internal" href="_modules/unstdlib/standard/contextlib_.html#open_atomic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unstdlib.standard.contextlib_.open_atomic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>Opens a file for atomic writing by writing to a temporary file, then moving
+the temporary file into place once writing has finished.</p>
+<p>When <tt class="docutils literal"><span class="pre">close()</span></tt> is called, the temporary file is moved into place,
+overwriting any file which may already exist (except on Windows, see note
+below). If moving the temporary file fails, <tt class="docutils literal"><span class="pre">abort()</span></tt> will be called <em>and
+an exception will be raised</em>.</p>
+<p>If <tt class="docutils literal"><span class="pre">abort()</span></tt> is called the temporary file will be removed and the
+<tt class="docutils literal"><span class="pre">aborted</span></tt> attribute will be set to <tt class="docutils literal"><span class="pre">True</span></tt>. No exception will be raised
+if an error is encountered while removing the temporary file; instead, the
+<tt class="docutils literal"><span class="pre">abort_error</span></tt> attribute will be set to the exception raised by
+<tt class="docutils literal"><span class="pre">os.remove</span></tt> (note: on Windows, if <tt class="docutils literal"><span class="pre">file.close()</span></tt> raises an exception,
+<tt class="docutils literal"><span class="pre">abort_error</span></tt> will be set to that exception; see implementation of
+<tt class="docutils literal"><span class="pre">abort()</span></tt> for details).</p>
+<p>By default, <tt class="docutils literal"><span class="pre">open_atomic</span></tt> will put the temporary file in the same
+directory as the target file:
+<tt class="docutils literal"><span class="pre">${dirname(target_file)}/.${basename(target_file)}.temp</span></tt>. See also the
+<tt class="docutils literal"><span class="pre">prefix</span></tt>, <tt class="docutils literal"><span class="pre">suffix</span></tt>, and <tt class="docutils literal"><span class="pre">dir</span></tt> arguments to <tt class="docutils literal"><span class="pre">open_atomic()</span></tt>. When
+changing these options, remember:</p>
+<blockquote>
+<div><ul class="simple">
+<li>The source and the destination must be on the same filesystem,
+otherwise the call to <tt class="docutils literal"><span class="pre">os.replace()</span></tt>/<tt class="docutils literal"><span class="pre">os.rename()</span></tt> may fail (and
+it <em>will</em> be much slower than necessary).</li>
+<li>Using a random temporary name is likely a poor idea, as random names
+will mean it&#8217;s more likely that temporary files will be left
+abandoned if a process is killed and re-started.</li>
+<li>The temporary file will be blindly overwritten.</li>
+</ul>
+</div></blockquote>
+<p>The <tt class="docutils literal"><span class="pre">temp_name</span></tt> and <tt class="docutils literal"><span class="pre">target_name</span></tt> attributes store the temporary
+and target file names, and the <tt class="docutils literal"><span class="pre">name</span></tt> attribute stores the &#8220;current&#8221;
+name: if the file is still being written it will store the <tt class="docutils literal"><span class="pre">temp_name</span></tt>,
+and if the temporary file has been moved into place it will store the
+<tt class="docutils literal"><span class="pre">target_name</span></tt>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><tt class="docutils literal"><span class="pre">open_atomic</span></tt> will not work correctly on Windows with Python 2.X or
+Python &lt;= 3.2: the call to <tt class="docutils literal"><span class="pre">open_atomic.close()</span></tt> will fail when the
+destination file exists (since <tt class="docutils literal"><span class="pre">os.rename</span></tt> will not overwrite the
+destination file; an exception will be raised and <tt class="docutils literal"><span class="pre">abort()</span></tt> will be
+called). On Python 3.3 and up <tt class="docutils literal"><span class="pre">os.replace</span></tt> will be used, which
+will be safe and atomic on both Windows and Unix.</p>
+</div>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">_doctest_setup</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">open_atomic</span><span class="p">(</span><span class="s">&quot;/tmp/open_atomic-example.txt&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">temp_name</span>
+<span class="go">&#39;/tmp/.open_atomic-example.txt.temp&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&quot;Hello, world!&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="bp">None</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">target_name</span><span class="p">),</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">temp_name</span><span class="p">))</span>
+<span class="go">(False, True)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s">&quot;/tmp/open_atomic-example.txt&quot;</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>By default, <tt class="docutils literal"><span class="pre">open_atomic</span></tt> uses the <tt class="docutils literal"><span class="pre">open</span></tt> builtin, but this behaviour
+can be changed using the <tt class="docutils literal"><span class="pre">opener</span></tt> argument:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">io</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">open_atomic</span><span class="p">(</span><span class="s">&quot;/tmp/open_atomic-example.txt&quot;</span><span class="p">,</span>
+<span class="gp">... </span>               <span class="n">opener</span><span class="o">=</span><span class="n">io</span><span class="o">.</span><span class="n">open</span><span class="p">,</span>
+<span class="gp">... </span>               <span class="n">mode</span><span class="o">=</span><span class="s">&quot;w+&quot;</span><span class="p">,</span>
+<span class="gp">... </span>               <span class="n">encoding</span><span class="o">=</span><span class="s">&quot;utf-8&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">some_text</span> <span class="o">=</span> <span class="s">u&quot;</span><span class="se">\u1234</span><span class="s">&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">some_text</span><span class="p">)</span> <span class="ow">and</span> <span class="bp">None</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span> <span class="o">==</span> <span class="n">some_text</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt id="unstdlib.standard.contextlib_.open_atomic.abort">
+<tt class="descname">abort</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/unstdlib/standard/contextlib_.html#open_atomic.abort"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unstdlib.standard.contextlib_.open_atomic.abort" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="unstdlib.standard.contextlib_.open_atomic.close">
+<tt class="descname">close</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/unstdlib/standard/contextlib_.html#open_atomic.close"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unstdlib.standard.contextlib_.open_atomic.close" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-unstdlib.standard.datetime_">
+<span id="unstdlib-standard-datetime-module"></span><h2>unstdlib.standard.datetime_ module<a class="headerlink" href="#module-unstdlib.standard.datetime_" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="unstdlib.standard.datetime_.iterate_date">
+<tt class="descclassname">unstdlib.standard.datetime_.</tt><tt class="descname">iterate_date</tt><big>(</big><em>start</em>, <em>stop=None</em>, <em>step=datetime.timedelta(1)</em><big>)</big><a class="reference internal" href="_modules/unstdlib/standard/datetime_.html#iterate_date"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unstdlib.standard.datetime_.iterate_date" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="unstdlib.standard.datetime_.iterate_date_values">
+<tt class="descclassname">unstdlib.standard.datetime_.</tt><tt class="descname">iterate_date_values</tt><big>(</big><em>d</em>, <em>start_date=None</em>, <em>stop_date=None</em>, <em>default=0</em><big>)</big><a class="reference internal" href="_modules/unstdlib/standard/datetime_.html#iterate_date_values"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unstdlib.standard.datetime_.iterate_date_values" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert (date, value) sorted lists into contiguous value-per-day data sets. Great for sparklines.</p>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre>[(datetime.date(2011, 1, 1), 1), (datetime.date(2011, 1, 4), 2)] -&gt; [1, 0, 0, 2]
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="unstdlib.standard.datetime_.isoformat_as_datetime">
+<tt class="descclassname">unstdlib.standard.datetime_.</tt><tt class="descname">isoformat_as_datetime</tt><big>(</big><em>s</em><big>)</big><a class="reference internal" href="_modules/unstdlib/standard/datetime_.html#isoformat_as_datetime"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unstdlib.standard.datetime_.isoformat_as_datetime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert a datetime.datetime.isoformat() string to a datetime.datetime() object.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="unstdlib.standard.datetime_.truncate_datetime">
+<tt class="descclassname">unstdlib.standard.datetime_.</tt><tt class="descname">truncate_datetime</tt><big>(</big><em>t</em>, <em>resolution</em><big>)</big><a class="reference internal" href="_modules/unstdlib/standard/datetime_.html#truncate_datetime"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unstdlib.standard.datetime_.truncate_datetime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a datetime <tt class="docutils literal"><span class="pre">t</span></tt> and a <tt class="docutils literal"><span class="pre">resolution</span></tt>, flatten the precision beyond the given resolution.</p>
+<p><tt class="docutils literal"><span class="pre">resolution</span></tt> can be one of: year, month, day, hour, minute, second, microsecond</p>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2000</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6000</span><span class="p">)</span> <span class="c"># Or, 2000-01-02 03:04:05.006000</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">truncate_datetime</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s">&#39;day&#39;</span><span class="p">)</span>
+<span class="go">datetime.datetime(2000, 1, 2, 0, 0)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()</span>
+<span class="go">&#39;2000-01-02T00:00:00&#39;</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">truncate_datetime</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s">&#39;minute&#39;</span><span class="p">)</span>
+<span class="go">datetime.datetime(2000, 1, 2, 3, 4)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()</span>
+<span class="go">&#39;2000-01-02T03:04:00&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="unstdlib.standard.datetime_.now">
+<tt class="descclassname">unstdlib.standard.datetime_.</tt><tt class="descname">now</tt><big>(</big><em>timezone=None</em><big>)</big><a class="reference internal" href="_modules/unstdlib/standard/datetime_.html#now"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unstdlib.standard.datetime_.now" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a naive datetime object for the given <tt class="docutils literal"><span class="pre">timezone</span></tt>. A <tt class="docutils literal"><span class="pre">timezone</span></tt>
+is any pytz- like or datetime.tzinfo-like timezone object. If no timezone
+is given, then UTC is assumed.</p>
+<p>This method is best used with pytz installed:</p>
+<div class="highlight-python"><div class="highlight"><pre>pip install pytz
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="unstdlib.standard.datetime_.datetime_from_timestamp">
+<tt class="descclassname">unstdlib.standard.datetime_.</tt><tt class="descname">datetime_from_timestamp</tt><big>(</big><em>timestamp</em><big>)</big><a class="reference internal" href="_modules/unstdlib/standard/datetime_.html#datetime_from_timestamp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unstdlib.standard.datetime_.datetime_from_timestamp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a naive datetime from <tt class="docutils literal"><span class="pre">timestamp</span></tt>.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">datetime_from_timestamp</span><span class="p">(</span><span class="mf">1234.5</span><span class="p">)</span>
+<span class="go">datetime.datetime(1970, 1, 1, 0, 20, 34, 500000)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="unstdlib.standard.datetime_.timestamp_from_datetime">
+<tt class="descclassname">unstdlib.standard.datetime_.</tt><tt class="descname">timestamp_from_datetime</tt><big>(</big><em>dt</em><big>)</big><a class="reference internal" href="_modules/unstdlib/standard/datetime_.html#timestamp_from_datetime"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unstdlib.standard.datetime_.timestamp_from_datetime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a timestamp from datetime <tt class="docutils literal"><span class="pre">dt</span></tt>.</p>
+<p>Note that timestamps are always UTC. If <tt class="docutils literal"><span class="pre">dt</span></tt> is aware, the resulting
+timestamp will correspond to the correct UTC time.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">timestamp_from_datetime</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">1970</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">34</span><span class="p">,</span> <span class="mi">500000</span><span class="p">))</span>
+<span class="go">1234.5</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="module-unstdlib.standard.dict_">
+<span id="unstdlib-standard-dict-module"></span><h2>unstdlib.standard.dict_ module<a class="headerlink" href="#module-unstdlib.standard.dict_" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="unstdlib.standard.dict_.get_many">
+<tt class="descclassname">unstdlib.standard.dict_.</tt><tt class="descname">get_many</tt><big>(</big><em>d</em>, <em>required=</em>, <span class="optional">[</span><span class="optional">]</span><em>optional=</em>, <span class="optional">[</span><span class="optional">]</span><em>one_of=</em><span class="optional">[</span><span class="optional">]</span><big>)</big><a class="reference internal" href="_modules/unstdlib/standard/dict_.html#get_many"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unstdlib.standard.dict_.get_many" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a predictable number of elements out of <tt class="docutils literal"><span class="pre">d</span></tt> in a list for auto-expanding.</p>
+<p>Keys in <tt class="docutils literal"><span class="pre">required</span></tt> will raise KeyError if not found in <tt class="docutils literal"><span class="pre">d</span></tt>.
+Keys in <tt class="docutils literal"><span class="pre">optional</span></tt> will return None if not found in <tt class="docutils literal"><span class="pre">d</span></tt>.
+Keys in <tt class="docutils literal"><span class="pre">one_of</span></tt> will raise KeyError if none exist, otherwise return the first in <tt class="docutils literal"><span class="pre">d</span></tt>.</p>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">uid</span><span class="p">,</span> <span class="n">action</span><span class="p">,</span> <span class="n">limit</span><span class="p">,</span> <span class="n">offset</span> <span class="o">=</span> <span class="n">get_many</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">params</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;uid&#39;</span><span class="p">,</span> <span class="s">&#39;action&#39;</span><span class="p">],</span> <span class="n">optional</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;limit&#39;</span><span class="p">,</span> <span class="s">&#39;offset&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Note: This function has been added to the webhelpers package.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="unstdlib.standard.dict_.pop_many">
+<tt class="descclassname">unstdlib.standard.dict_.</tt><tt class="descname">pop_many</tt><big>(</big><em>d</em>, <em>keys</em>, <em>default=None</em><big>)</big><a class="reference internal" href="_modules/unstdlib/standard/dict_.html#pop_many"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unstdlib.standard.dict_.pop_many" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-unstdlib.standard.exception_">
+<span id="unstdlib-standard-exception-module"></span><h2>unstdlib.standard.exception_ module<a class="headerlink" href="#module-unstdlib.standard.exception_" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="unstdlib.standard.exception_.convert_exception">
+<tt class="descclassname">unstdlib.standard.exception_.</tt><tt class="descname">convert_exception</tt><big>(</big><em>from_exception</em>, <em>to_exception</em>, <em>*to_args</em>, <em>**to_kw</em><big>)</big><a class="reference internal" href="_modules/unstdlib/standard/exception_.html#convert_exception"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unstdlib.standard.exception_.convert_exception" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decorator: Catch exception <tt class="docutils literal"><span class="pre">from_exception</span></tt> and instead raise <tt class="docutils literal"><span class="pre">to_exception(*to_args,</span> <span class="pre">**to_kw)</span></tt>.</p>
+<p>Useful when modules you&#8217;re using in a method throw their own errors that you want to
+convert to your own exceptions that you handle higher in the stack.</p>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">FooError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+<span class="k">class</span> <span class="nc">BarError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="n">message</span>
+
+<span class="nd">@convert_exception</span><span class="p">(</span><span class="n">FooError</span><span class="p">,</span> <span class="n">BarError</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s">&#39;bar&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">throw_foo</span><span class="p">():</span>
+    <span class="k">raise</span> <span class="n">FooError</span><span class="p">(</span><span class="s">&#39;foo&#39;</span><span class="p">)</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">throw_foo</span><span class="p">()</span>
+<span class="k">except</span> <span class="n">BarError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="k">assert</span> <span class="n">e</span><span class="o">.</span><span class="n">message</span> <span class="o">==</span> <span class="s">&#39;bar&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="module-unstdlib.standard.functools_">
+<span id="unstdlib-standard-functools-module"></span><h2>unstdlib.standard.functools_ module<a class="headerlink" href="#module-unstdlib.standard.functools_" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="unstdlib.standard.functools_.memoized">
+<tt class="descclassname">unstdlib.standard.functools_.</tt><tt class="descname">memoized</tt><big>(</big><em>fn=None</em>, <em>cache=None</em><big>)</big><a class="reference internal" href="_modules/unstdlib/standard/functools_.html#memoized"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unstdlib.standard.functools_.memoized" title="Permalink to this definition">¶</a></dt>
+<dd><p>Memoize a function into an optionally-specificed cache container.</p>
+<p>If the <cite>cache</cite> container is not specified, then the instance container is
+accessible from the wrapped function&#8217;s <cite>memoize_cache</cite> property.</p>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="nd">@memoized</span>
+<span class="gp">... </span><span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="n">bar</span><span class="p">):</span>
+<span class="gp">... </span>  <span class="k">print</span><span class="p">(</span><span class="s">&quot;Not cached.&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">foo</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">Not cached.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">foo</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">foo</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">Not cached.</span>
+</pre></div>
+</div>
+<p>Example with a specific cache container (in this case, the
+<tt class="docutils literal"><span class="pre">RecentlyUsedContainer</span></tt>, which will only store the <tt class="docutils literal"><span class="pre">maxsize</span></tt> most
+recently accessed items):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">unstdlib.standard.collections_</span> <span class="kn">import</span> <span class="n">RecentlyUsedContainer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lru_container</span> <span class="o">=</span> <span class="n">RecentlyUsedContainer</span><span class="p">(</span><span class="n">maxsize</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nd">@memoized</span><span class="p">(</span><span class="n">cache</span><span class="o">=</span><span class="n">lru_container</span><span class="p">)</span>
+<span class="gp">... </span><span class="k">def</span> <span class="nf">baz</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="gp">... </span>  <span class="k">print</span><span class="p">(</span><span class="s">&quot;Not cached.&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">baz</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">Not cached.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">baz</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">baz</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">Not cached.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">baz</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">Not cached.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">baz</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">baz</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">Not cached.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Notice that the &#39;2&#39; key remains, but the &#39;1&#39; key was evicted from</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># the cache.</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="unstdlib.standard.functools_.memoized_property">
+<em class="property">class </em><tt class="descclassname">unstdlib.standard.functools_.</tt><tt class="descname">memoized_property</tt><big>(</big><em>fget</em>, <em>doc=None</em>, <em>name=None</em><big>)</big><a class="reference internal" href="_modules/unstdlib/standard/functools_.html#memoized_property"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unstdlib.standard.functools_.memoized_property" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>A read-only &#64;property that is only evaluated once.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="unstdlib.standard.functools_.assert_hashable">
+<tt class="descclassname">unstdlib.standard.functools_.</tt><tt class="descname">assert_hashable</tt><big>(</big><em>*args</em>, <em>**kw</em><big>)</big><a class="reference internal" href="_modules/unstdlib/standard/functools_.html#assert_hashable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unstdlib.standard.functools_.assert_hashable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Verify that each argument is hashable.</p>
+<p>Passes silently if successful. Raises descriptive TypeError otherwise.</p>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">assert_hashable</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s">&#39;foo&#39;</span><span class="p">,</span> <span class="n">bar</span><span class="o">=</span><span class="s">&#39;baz&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">assert_hashable</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="p">[],</span> <span class="n">baz</span><span class="o">=</span><span class="s">&#39;baz&#39;</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+  <span class="c">...</span>
+<span class="gr">TypeError</span>: <span class="n">Argument in position 1 is not hashable: []</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">assert_hashable</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s">&#39;foo&#39;</span><span class="p">,</span> <span class="n">bar</span><span class="o">=</span><span class="p">[])</span>
+<span class="gt">Traceback (most recent call last):</span>
+  <span class="c">...</span>
+<span class="gr">TypeError</span>: <span class="n">Keyword argument &#39;bar&#39; is not hashable: []</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="unstdlib.standard.functools_.deprecated">
+<tt class="descclassname">unstdlib.standard.functools_.</tt><tt class="descname">deprecated</tt><big>(</big><em>message</em>, <em>exception=&lt;type 'exceptions.PendingDeprecationWarning'&gt;</em><big>)</big><a class="reference internal" href="_modules/unstdlib/standard/functools_.html#deprecated"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unstdlib.standard.functools_.deprecated" title="Permalink to this definition">¶</a></dt>
+<dd><p>Throw a warning when a function/method will be soon deprecated</p>
+<p>Supports passing a <tt class="docutils literal"><span class="pre">message</span></tt> and an <tt class="docutils literal"><span class="pre">exception</span></tt> class
+(uses <tt class="docutils literal"><span class="pre">PendingDeprecationWarning</span></tt> by default). This is useful if you
+want to alternatively pass a <tt class="docutils literal"><span class="pre">DeprecationWarning</span></tt> exception for already
+deprecated functions/methods.</p>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">warnings</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">wraps</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">message</span> <span class="o">=</span> <span class="s">&quot;this function will be deprecated in the near future&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nd">@deprecated</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+<span class="gp">... </span><span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="n">n</span><span class="o">+</span><span class="n">n</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">warnings</span><span class="o">.</span><span class="n">catch_warnings</span><span class="p">(</span><span class="n">record</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span> <span class="k">as</span> <span class="n">w</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s">&quot;always&quot;</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">foo</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">w</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
+<span class="gp">... </span>    <span class="k">assert</span> <span class="nb">issubclass</span><span class="p">(</span><span class="n">w</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">category</span><span class="p">,</span> <span class="ne">PendingDeprecationWarning</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="k">assert</span> <span class="n">message</span> <span class="o">==</span> <span class="nb">str</span><span class="p">(</span><span class="n">w</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">message</span><span class="p">)</span>
+<span class="go">8</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="module-unstdlib.standard.list_">
+<span id="unstdlib-standard-list-module"></span><h2>unstdlib.standard.list_ module<a class="headerlink" href="#module-unstdlib.standard.list_" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="unstdlib.standard.list_.groupby_count">
+<tt class="descclassname">unstdlib.standard.list_.</tt><tt class="descname">groupby_count</tt><big>(</big><em>i</em>, <em>key=None</em>, <em>force_keys=None</em><big>)</big><a class="reference internal" href="_modules/unstdlib/standard/list_.html#groupby_count"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unstdlib.standard.list_.groupby_count" title="Permalink to this definition">¶</a></dt>
+<dd><p>Aggregate iterator values into buckets based on how frequently the
+values appear.</p>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">groupby_count</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]))</span>
+<span class="go">[(1, 3), (2, 1), (3, 1)]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="unstdlib.standard.list_.iterate">
+<tt class="descclassname">unstdlib.standard.list_.</tt><tt class="descname">iterate</tt><big>(</big><em>maybe_iter</em>, <em>unless=((&lt;type 'basestring'&gt;</em>, <em>)</em>, <em>&lt;type 'dict'&gt;)</em><big>)</big><a class="reference internal" href="_modules/unstdlib/standard/list_.html#iterate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unstdlib.standard.list_.iterate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Always return an iterable.</p>
+<p>Returns <tt class="docutils literal"><span class="pre">maybe_iter</span></tt> if it is an iterable, otherwise it returns a single
+element iterable containing <tt class="docutils literal"><span class="pre">maybe_iter</span></tt>. By default, strings and dicts
+are treated as non-iterable. This can be overridden by passing in a type
+or tuple of types for <tt class="docutils literal"><span class="pre">unless</span></tt>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>maybe_iter</strong> &#8211; A value to return as an iterable.</li>
+<li><strong>unless</strong> &#8211; A type or tuple of types (same as <tt class="docutils literal"><span class="pre">isinstance</span></tt>) to be treated as
+non-iterable.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">iterate</span><span class="p">(</span><span class="s">&#39;foo&#39;</span><span class="p">)</span>
+<span class="go">[&#39;foo&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">iterate</span><span class="p">([</span><span class="s">&#39;foo&#39;</span><span class="p">])</span>
+<span class="go">[&#39;foo&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">iterate</span><span class="p">([</span><span class="s">&#39;foo&#39;</span><span class="p">],</span> <span class="n">unless</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span>
+<span class="go">[[&#39;foo&#39;]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">iterate</span><span class="p">(</span><span class="nb">xrange</span><span class="p">(</span><span class="mi">5</span><span class="p">)))</span>
+<span class="go">[0, 1, 2, 3, 4]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="unstdlib.standard.list_.is_iterable">
+<tt class="descclassname">unstdlib.standard.list_.</tt><tt class="descname">is_iterable</tt><big>(</big><em>maybe_iter</em>, <em>unless=((&lt;type 'basestring'&gt;</em>, <em>)</em>, <em>&lt;type 'dict'&gt;)</em><big>)</big><a class="reference internal" href="_modules/unstdlib/standard/list_.html#is_iterable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unstdlib.standard.list_.is_iterable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return whether <tt class="docutils literal"><span class="pre">maybe_iter</span></tt> is an iterable, unless it&#8217;s an instance of one
+of the base class, or tuple of base classes, given in <tt class="docutils literal"><span class="pre">unless</span></tt>.</p>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">is_iterable</span><span class="p">(</span><span class="s">&#39;foo&#39;</span><span class="p">)</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">is_iterable</span><span class="p">([</span><span class="s">&#39;foo&#39;</span><span class="p">])</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">is_iterable</span><span class="p">([</span><span class="s">&#39;foo&#39;</span><span class="p">],</span> <span class="n">unless</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">is_iterable</span><span class="p">(</span><span class="nb">xrange</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="unstdlib.standard.list_.iterate_chunks">
+<tt class="descclassname">unstdlib.standard.list_.</tt><tt class="descname">iterate_chunks</tt><big>(</big><em>i</em>, <em>size=10</em><big>)</big><a class="reference internal" href="_modules/unstdlib/standard/list_.html#iterate_chunks"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unstdlib.standard.list_.iterate_chunks" title="Permalink to this definition">¶</a></dt>
+<dd><p>Iterate over an iterator <tt class="docutils literal"><span class="pre">i</span></tt> in <tt class="docutils literal"><span class="pre">size</span></tt> chunks, yield chunks.
+Similar to pagination.</p>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">iterate_chunks</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="n">size</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+<span class="go">[[1, 2], [3, 4]]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="unstdlib.standard.list_.iterate_items">
+<tt class="descclassname">unstdlib.standard.list_.</tt><tt class="descname">iterate_items</tt><big>(</big><em>dictish</em><big>)</big><a class="reference internal" href="_modules/unstdlib/standard/list_.html#iterate_items"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unstdlib.standard.list_.iterate_items" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a consistent (key, value) iterable on dict-like objects,
+including lists of tuple pairs.</p>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">iterate_items</span><span class="p">({</span><span class="s">&#39;a&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}))</span>
+<span class="go">[(&#39;a&#39;, 1)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">iterate_items</span><span class="p">([(</span><span class="s">&#39;a&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="s">&#39;b&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)]))</span>
+<span class="go">[(&#39;a&#39;, 1), (&#39;b&#39;, 2)]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="unstdlib.standard.list_.iterate_flatten">
+<tt class="descclassname">unstdlib.standard.list_.</tt><tt class="descname">iterate_flatten</tt><big>(</big><em>q</em><big>)</big><a class="reference internal" href="_modules/unstdlib/standard/list_.html#iterate_flatten"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unstdlib.standard.list_.iterate_flatten" title="Permalink to this definition">¶</a></dt>
+<dd><p>Flatten nested lists.</p>
+<p>Useful for flattening one-value tuple rows returned from a database query.</p>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre>[(&quot;foo&quot;,), (&quot;bar&quot;,)] -&gt; [&quot;foo&quot;, &quot;bar&quot;]
+
+[[1,2,3],[4,5,6]] -&gt; [1,2,3,4,5,6]
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="unstdlib.standard.list_.listify">
+<tt class="descclassname">unstdlib.standard.list_.</tt><tt class="descname">listify</tt><big>(</big><em>fn=None</em>, <em>wrapper=&lt;type 'list'&gt;</em><big>)</big><a class="reference internal" href="_modules/unstdlib/standard/list_.html#listify"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unstdlib.standard.list_.listify" title="Permalink to this definition">¶</a></dt>
+<dd><p>A decorator which wraps a function&#8217;s return value in <tt class="docutils literal"><span class="pre">list(...)</span></tt>.</p>
+<p>Useful when an algorithm can be expressed more cleanly as a generator but
+the function should return an list.</p>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="nd">@listify</span>
+<span class="gp">... </span><span class="k">def</span> <span class="nf">get_lengths</span><span class="p">(</span><span class="n">iterable</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">iterable</span><span class="p">:</span>
+<span class="gp">... </span>        <span class="k">yield</span> <span class="nb">len</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">get_lengths</span><span class="p">([</span><span class="s">&quot;spam&quot;</span><span class="p">,</span> <span class="s">&quot;eggs&quot;</span><span class="p">])</span>
+<span class="go">[4, 4]</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nd">@listify</span><span class="p">(</span><span class="n">wrapper</span><span class="o">=</span><span class="nb">tuple</span><span class="p">)</span>
+<span class="gp">... </span><span class="k">def</span> <span class="nf">get_lengths_tuple</span><span class="p">(</span><span class="n">iterable</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">iterable</span><span class="p">:</span>
+<span class="gp">... </span>        <span class="k">yield</span> <span class="nb">len</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">get_lengths_tuple</span><span class="p">([</span><span class="s">&quot;foo&quot;</span><span class="p">,</span> <span class="s">&quot;bar&quot;</span><span class="p">])</span>
+<span class="go">(3, 3)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="module-unstdlib.standard.os_">
+<span id="unstdlib-standard-os-module"></span><h2>unstdlib.standard.os_ module<a class="headerlink" href="#module-unstdlib.standard.os_" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="unstdlib.standard.os_.chdir">
+<em class="property">class </em><tt class="descclassname">unstdlib.standard.os_.</tt><tt class="descname">chdir</tt><big>(</big><em>new_path</em>, <em>old_path=None</em><big>)</big><a class="reference internal" href="_modules/unstdlib/standard/os_.html#chdir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unstdlib.standard.os_.chdir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>A drop-in replacement for <tt class="docutils literal"><span class="pre">os.chdir</span></tt> which can also be used as a
+context manager.</p>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">old_cwd</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">chdir</span><span class="p">(</span><span class="s">&quot;/usr/&quot;</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">print</span><span class="p">(</span><span class="s">&quot;current dir: {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()))</span>
+<span class="gp">...</span>
+<span class="go">current dir: /usr</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span> <span class="o">==</span> <span class="n">old_cwd</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">chdir</span><span class="p">(</span><span class="s">&quot;/usr/&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
+<span class="go">&#39;/usr&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">unchdir</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span> <span class="o">==</span> <span class="n">old_cwd</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt id="unstdlib.standard.os_.chdir.chdir">
+<tt class="descname">chdir</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/unstdlib/standard/os_.html#chdir.chdir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unstdlib.standard.os_.chdir.chdir" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="unstdlib.standard.os_.chdir.unchdir">
+<tt class="descname">unchdir</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/unstdlib/standard/os_.html#chdir.unchdir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unstdlib.standard.os_.chdir.unchdir" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-unstdlib.standard.random_">
+<span id="unstdlib-standard-random-module"></span><h2>unstdlib.standard.random_ module<a class="headerlink" href="#module-unstdlib.standard.random_" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-unstdlib.standard.string_">
+<span id="unstdlib-standard-string-module"></span><h2>unstdlib.standard.string_ module<a class="headerlink" href="#module-unstdlib.standard.string_" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="unstdlib.standard.string_.random_string">
+<tt class="descclassname">unstdlib.standard.string_.</tt><tt class="descname">random_string</tt><big>(</big><em>length=6</em>, <em>alphabet='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'</em><big>)</big><a class="reference internal" href="_modules/unstdlib/standard/string_.html#random_string"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unstdlib.standard.string_.random_string" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a random string of given length and alphabet.</p>
+<p>Default alphabet is url-friendly (base62).</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="unstdlib.standard.string_.number_to_string">
+<tt class="descclassname">unstdlib.standard.string_.</tt><tt class="descname">number_to_string</tt><big>(</big><em>n</em>, <em>alphabet</em><big>)</big><a class="reference internal" href="_modules/unstdlib/standard/string_.html#number_to_string"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unstdlib.standard.string_.number_to_string" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given an non-negative integer <tt class="docutils literal"><span class="pre">n</span></tt>, convert it to a string composed of
+the given <tt class="docutils literal"><span class="pre">alphabet</span></tt> mapping, where the position of each element in
+<tt class="docutils literal"><span class="pre">alphabet</span></tt> is its radix value.</p>
+<p>Examples:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">number_to_string</span><span class="p">(</span><span class="mi">12345678</span><span class="p">,</span> <span class="s">&#39;01&#39;</span><span class="p">)</span>
+<span class="go">&#39;101111000110000101001110&#39;</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">number_to_string</span><span class="p">(</span><span class="mi">12345678</span><span class="p">,</span> <span class="s">&#39;ab&#39;</span><span class="p">)</span>
+<span class="go">&#39;babbbbaaabbaaaababaabbba&#39;</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">number_to_string</span><span class="p">(</span><span class="mi">12345678</span><span class="p">,</span> <span class="n">string</span><span class="o">.</span><span class="n">ascii_letters</span> <span class="o">+</span> <span class="n">string</span><span class="o">.</span><span class="n">digits</span><span class="p">)</span>
+<span class="go">&#39;ZXP0&#39;</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">number_to_string</span><span class="p">(</span><span class="mi">12345</span><span class="p">,</span> <span class="p">[</span><span class="s">&#39;zero &#39;</span><span class="p">,</span> <span class="s">&#39;one &#39;</span><span class="p">,</span> <span class="s">&#39;two &#39;</span><span class="p">,</span> <span class="s">&#39;three &#39;</span><span class="p">,</span> <span class="s">&#39;four &#39;</span><span class="p">,</span> <span class="s">&#39;five &#39;</span><span class="p">,</span> <span class="s">&#39;six &#39;</span><span class="p">,</span> <span class="s">&#39;seven &#39;</span><span class="p">,</span> <span class="s">&#39;eight &#39;</span><span class="p">,</span> <span class="s">&#39;nine &#39;</span><span class="p">])</span>
+<span class="go">&#39;one two three four five &#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="unstdlib.standard.string_.string_to_number">
+<tt class="descclassname">unstdlib.standard.string_.</tt><tt class="descname">string_to_number</tt><big>(</big><em>s</em>, <em>alphabet</em><big>)</big><a class="reference internal" href="_modules/unstdlib/standard/string_.html#string_to_number"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unstdlib.standard.string_.string_to_number" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a string <tt class="docutils literal"><span class="pre">s</span></tt>, convert it to an integer composed of the given
+<tt class="docutils literal"><span class="pre">alphabet</span></tt> mapping, where the position of each element in <tt class="docutils literal"><span class="pre">alphabet</span></tt> is
+its radix value.</p>
+<p>Examples:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">string_to_number</span><span class="p">(</span><span class="s">&#39;101111000110000101001110&#39;</span><span class="p">,</span> <span class="s">&#39;01&#39;</span><span class="p">)</span>
+<span class="go">12345678</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">string_to_number</span><span class="p">(</span><span class="s">&#39;babbbbaaabbaaaababaabbba&#39;</span><span class="p">,</span> <span class="s">&#39;ab&#39;</span><span class="p">)</span>
+<span class="go">12345678</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">string_to_number</span><span class="p">(</span><span class="s">&#39;ZXP0&#39;</span><span class="p">,</span> <span class="n">string</span><span class="o">.</span><span class="n">ascii_letters</span> <span class="o">+</span> <span class="n">string</span><span class="o">.</span><span class="n">digits</span><span class="p">)</span>
+<span class="go">12345678</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="unstdlib.standard.string_.number_to_bytes">
+<tt class="descclassname">unstdlib.standard.string_.</tt><tt class="descname">number_to_bytes</tt><big>(</big><em>n</em>, <em>endian='big'</em><big>)</big><a class="reference internal" href="_modules/unstdlib/standard/string_.html#number_to_bytes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unstdlib.standard.string_.number_to_bytes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert an integer to a corresponding string of bytes..</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>n</strong> &#8211; Integer to convert.</li>
+<li><strong>endian</strong> &#8211; Byte order to convert into (&#8216;big&#8217; or &#8216;little&#8217; endian-ness, default
+&#8216;big&#8217;)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Assumes bytes are 8 bits.</p>
+<p>This is a special-case version of number_to_string with a full base-256
+ASCII alphabet. It is the reverse of <tt class="docutils literal"><span class="pre">bytes_to_number(b)</span></tt>.</p>
+<p>Examples:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="p">(</span><span class="n">number_to_bytes</span><span class="p">(</span><span class="mi">42</span><span class="p">))</span>
+<span class="go">b&#39;*&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="p">(</span><span class="n">number_to_bytes</span><span class="p">(</span><span class="mi">255</span><span class="p">))</span>
+<span class="go">b&#39;\xff&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="p">(</span><span class="n">number_to_bytes</span><span class="p">(</span><span class="mi">256</span><span class="p">))</span>
+<span class="go">b&#39;\x01\x00&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="p">(</span><span class="n">number_to_bytes</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="n">endian</span><span class="o">=</span><span class="s">&#39;little&#39;</span><span class="p">))</span>
+<span class="go">b&#39;\x00\x01&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="unstdlib.standard.string_.bytes_to_number">
+<tt class="descclassname">unstdlib.standard.string_.</tt><tt class="descname">bytes_to_number</tt><big>(</big><em>b</em>, <em>endian='big'</em><big>)</big><a class="reference internal" href="_modules/unstdlib/standard/string_.html#bytes_to_number"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unstdlib.standard.string_.bytes_to_number" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert a string to an integer.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>b</strong> &#8211; String or bytearray to convert.</li>
+<li><strong>endian</strong> &#8211; Byte order to convert into (&#8216;big&#8217; or &#8216;little&#8217; endian-ness, default
+&#8216;big&#8217;)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Assumes bytes are 8 bits.</p>
+<p>This is a special-case version of string_to_number with a full base-256
+ASCII alphabet. It is the reverse of <tt class="docutils literal"><span class="pre">number_to_bytes(n)</span></tt>.</p>
+<p>Examples:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">bytes_to_number</span><span class="p">(</span><span class="n">b</span><span class="s">&#39;*&#39;</span><span class="p">)</span>
+<span class="go">42</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bytes_to_number</span><span class="p">(</span><span class="n">b</span><span class="s">&#39;</span><span class="se">\xff</span><span class="s">&#39;</span><span class="p">)</span>
+<span class="go">255</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bytes_to_number</span><span class="p">(</span><span class="n">b</span><span class="s">&#39;</span><span class="se">\x01\x00</span><span class="s">&#39;</span><span class="p">)</span>
+<span class="go">256</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bytes_to_number</span><span class="p">(</span><span class="n">b</span><span class="s">&#39;</span><span class="se">\x00\x01</span><span class="s">&#39;</span><span class="p">,</span> <span class="n">endian</span><span class="o">=</span><span class="s">&#39;little&#39;</span><span class="p">)</span>
+<span class="go">256</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="unstdlib.standard.string_.dollars_to_cents">
+<tt class="descclassname">unstdlib.standard.string_.</tt><tt class="descname">dollars_to_cents</tt><big>(</big><em>s</em>, <em>allow_negative=False</em><big>)</big><a class="reference internal" href="_modules/unstdlib/standard/string_.html#dollars_to_cents"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unstdlib.standard.string_.dollars_to_cents" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a string or integer representing dollars, return an integer of
+equivalent cents, in an input-resilient way.</p>
+<p>This works by stripping any non-numeric characters before attempting to
+cast the value.</p>
+<p>Examples:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">dollars_to_cents</span><span class="p">(</span><span class="s">&#39;$1&#39;</span><span class="p">)</span>
+<span class="go">100</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dollars_to_cents</span><span class="p">(</span><span class="s">&#39;1&#39;</span><span class="p">)</span>
+<span class="go">100</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dollars_to_cents</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">100</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dollars_to_cents</span><span class="p">(</span><span class="s">&#39;1e2&#39;</span><span class="p">)</span>
+<span class="go">10000</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dollars_to_cents</span><span class="p">(</span><span class="s">&#39;-1$&#39;</span><span class="p">,</span> <span class="n">allow_negative</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="go">-100</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dollars_to_cents</span><span class="p">(</span><span class="s">&#39;1 dollar&#39;</span><span class="p">)</span>
+<span class="go">100</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="unstdlib.standard.string_.to_str">
+<tt class="descclassname">unstdlib.standard.string_.</tt><tt class="descname">to_str</tt><big>(</big><em>obj</em>, <em>encoding='utf-8'</em>, <em>**encode_args</em><big>)</big><a class="reference internal" href="_modules/unstdlib/standard/string_.html#to_str"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unstdlib.standard.string_.to_str" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a <tt class="docutils literal"><span class="pre">str</span></tt> of <tt class="docutils literal"><span class="pre">obj</span></tt>, encoding using <tt class="docutils literal"><span class="pre">encoding</span></tt> if necessary. For
+example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">some_str</span> <span class="o">=</span> <span class="n">b</span><span class="s">&quot;</span><span class="se">\xff</span><span class="s">&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">some_unicode</span> <span class="o">=</span> <span class="s">u&quot;</span><span class="se">\u1234</span><span class="s">&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">some_exception</span> <span class="o">=</span> <span class="ne">Exception</span><span class="p">(</span><span class="s">u&#39;Error: &#39;</span> <span class="o">+</span> <span class="n">some_unicode</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="p">(</span><span class="n">to_str</span><span class="p">(</span><span class="n">some_str</span><span class="p">))</span>
+<span class="go">b&#39;\xff&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="p">(</span><span class="n">to_str</span><span class="p">(</span><span class="n">some_unicode</span><span class="p">))</span>
+<span class="go">b&#39;\xe1\x88\xb4&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="p">(</span><span class="n">to_str</span><span class="p">(</span><span class="n">some_exception</span><span class="p">))</span>
+<span class="go">b&#39;Error: \xe1\x88\xb4&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="p">(</span><span class="n">to_str</span><span class="p">([</span><span class="mi">42</span><span class="p">]))</span>
+<span class="go">b&#39;[42]&#39;</span>
+</pre></div>
+</div>
+<p>See source code for detailed semantics.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="unstdlib.standard.string_.to_unicode">
+<tt class="descclassname">unstdlib.standard.string_.</tt><tt class="descname">to_unicode</tt><big>(</big><em>obj</em>, <em>encoding='utf-8'</em>, <em>fallback='latin1'</em>, <em>**decode_args</em><big>)</big><a class="reference internal" href="_modules/unstdlib/standard/string_.html#to_unicode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unstdlib.standard.string_.to_unicode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a <tt class="docutils literal"><span class="pre">unicode</span></tt> of <tt class="docutils literal"><span class="pre">obj</span></tt>, decoding using <tt class="docutils literal"><span class="pre">encoding</span></tt> if necessary.
+If decoding fails, the <tt class="docutils literal"><span class="pre">fallback</span></tt> encoding (default <tt class="docutils literal"><span class="pre">latin1</span></tt>) is used.</p>
+<p>Examples:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="p">(</span><span class="n">to_unicode</span><span class="p">(</span><span class="n">b</span><span class="s">&#39;</span><span class="se">\xe1\x88\xb4</span><span class="s">&#39;</span><span class="p">))</span>
+<span class="go">u&#39;\u1234&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="p">(</span><span class="n">to_unicode</span><span class="p">(</span><span class="n">b</span><span class="s">&#39;</span><span class="se">\xff</span><span class="s">&#39;</span><span class="p">))</span>
+<span class="go">u&#39;\xff&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="p">(</span><span class="n">to_unicode</span><span class="p">(</span><span class="s">u&#39;</span><span class="se">\u1234</span><span class="s">&#39;</span><span class="p">))</span>
+<span class="go">u&#39;\u1234&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="p">(</span><span class="n">to_unicode</span><span class="p">(</span><span class="ne">Exception</span><span class="p">(</span><span class="s">u&#39;</span><span class="se">\u1234</span><span class="s">&#39;</span><span class="p">)))</span>
+<span class="go">u&#39;\u1234&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="p">(</span><span class="n">to_unicode</span><span class="p">([</span><span class="mi">42</span><span class="p">]))</span>
+<span class="go">u&#39;[42]&#39;</span>
+</pre></div>
+</div>
+<p>See source code for detailed semantics.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="unstdlib.standard.string_.to_int">
+<tt class="descclassname">unstdlib.standard.string_.</tt><tt class="descname">to_int</tt><big>(</big><em>s</em>, <em>default=0</em><big>)</big><a class="reference internal" href="_modules/unstdlib/standard/string_.html#to_int"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unstdlib.standard.string_.to_int" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return input converted into an integer. If failed, then return <tt class="docutils literal"><span class="pre">default</span></tt>.</p>
+<p>Examples:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">to_int</span><span class="p">(</span><span class="s">&#39;1&#39;</span><span class="p">)</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">to_int</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">to_int</span><span class="p">(</span><span class="s">&#39;&#39;</span><span class="p">)</span>
+<span class="go">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">to_int</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
+<span class="go">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">to_int</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s">&#39;Empty&#39;</span><span class="p">)</span>
+<span class="go">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">to_int</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s">&#39;Empty&#39;</span><span class="p">)</span>
+<span class="go">&#39;Empty&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="unstdlib.standard.string_.to_float">
+<tt class="descclassname">unstdlib.standard.string_.</tt><tt class="descname">to_float</tt><big>(</big><em>s</em>, <em>default=0.0</em>, <em>allow_nan=False</em><big>)</big><a class="reference internal" href="_modules/unstdlib/standard/string_.html#to_float"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unstdlib.standard.string_.to_float" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return input converted into a float. If failed, then return <tt class="docutils literal"><span class="pre">default</span></tt>.</p>
+<p>Note that, by default, <tt class="docutils literal"><span class="pre">allow_nan=False</span></tt>, so <tt class="docutils literal"><span class="pre">to_float</span></tt> will not return
+<tt class="docutils literal"><span class="pre">nan</span></tt>, <tt class="docutils literal"><span class="pre">inf</span></tt>, or <tt class="docutils literal"><span class="pre">-inf</span></tt>.</p>
+<p>Examples:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">to_float</span><span class="p">(</span><span class="s">&#39;1.5&#39;</span><span class="p">)</span>
+<span class="go">1.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">to_float</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">1.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">to_float</span><span class="p">(</span><span class="s">&#39;&#39;</span><span class="p">)</span>
+<span class="go">0.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">to_float</span><span class="p">(</span><span class="s">&#39;nan&#39;</span><span class="p">)</span>
+<span class="go">0.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">to_float</span><span class="p">(</span><span class="s">&#39;inf&#39;</span><span class="p">)</span>
+<span class="go">0.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">to_float</span><span class="p">(</span><span class="s">&#39;-inf&#39;</span><span class="p">,</span> <span class="n">allow_nan</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="go">-inf</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">to_float</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
+<span class="go">0.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">to_float</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s">&#39;Empty&#39;</span><span class="p">)</span>
+<span class="go">0.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">to_float</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s">&#39;Empty&#39;</span><span class="p">)</span>
+<span class="go">&#39;Empty&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="unstdlib.standard.string_.format_int">
+<tt class="descclassname">unstdlib.standard.string_.</tt><tt class="descname">format_int</tt><big>(</big><em>n</em>, <em>singular=&lt;object object at 0x1040e4bf0&gt;</em>, <em>plural=&lt;object object at 0x1040e4bf0&gt;</em><big>)</big><a class="reference internal" href="_modules/unstdlib/standard/string_.html#format_int"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unstdlib.standard.string_.format_int" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return <cite>singular.format(n)</cite> if n is 1, or <cite>plural.format(n)</cite> otherwise. If
+plural is not specified, then it is assumed to be same as singular but
+suffixed with an &#8216;s&#8217;.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>n</strong> &#8211; Integer which determines pluralness.</li>
+<li><strong>singular</strong> &#8211; String with a format() placeholder for n. (Default: <cite>u&#8221;{:,}&#8221;</cite>)</li>
+<li><strong>plural</strong> &#8211; String with a format() placeholder for n. (Default: If singular is not
+default, then it&#8217;s <cite>singular + u&#8221;s&#8221;</cite>. Otherwise it&#8217;s same as singular.)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="p">(</span><span class="n">format_int</span><span class="p">(</span><span class="mi">1000</span><span class="p">))</span>
+<span class="go">u&#39;1,000&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="p">(</span><span class="n">format_int</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s">u&quot;{} day&quot;</span><span class="p">))</span>
+<span class="go">u&#39;1 day&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="p">(</span><span class="n">format_int</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s">u&quot;{} day&quot;</span><span class="p">))</span>
+<span class="go">u&#39;2 days&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="p">(</span><span class="n">format_int</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s">u&quot;{} box&quot;</span><span class="p">,</span> <span class="s">u&quot;{} boxen&quot;</span><span class="p">))</span>
+<span class="go">u&#39;2 boxen&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="p">(</span><span class="n">format_int</span><span class="p">(</span><span class="mi">20000</span><span class="p">,</span> <span class="s">u&quot;{:,} box&quot;</span><span class="p">,</span> <span class="s">u&quot;{:,} boxen&quot;</span><span class="p">))</span>
+<span class="go">u&#39;20,000 boxen&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="unstdlib.standard.string_.slugify">
+<tt class="descclassname">unstdlib.standard.string_.</tt><tt class="descname">slugify</tt><big>(</big><em>s</em>, <em>delimiter='-'</em><big>)</big><a class="reference internal" href="_modules/unstdlib/standard/string_.html#slugify"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unstdlib.standard.string_.slugify" title="Permalink to this definition">¶</a></dt>
+<dd><p>Normalize <cite>s</cite> into ASCII and replace non-word characters with <cite>delimiter</cite>.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-unstdlib.standard.type_">
+<span id="unstdlib-standard-type-module"></span><h2>unstdlib.standard.type_ module<a class="headerlink" href="#module-unstdlib.standard.type_" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="unstdlib.standard.type_.is_subclass">
+<tt class="descclassname">unstdlib.standard.type_.</tt><tt class="descname">is_subclass</tt><big>(</big><em>o</em>, <em>bases</em><big>)</big><a class="reference internal" href="_modules/unstdlib/standard/type_.html#is_subclass"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#unstdlib.standard.type_.is_subclass" title="Permalink to this definition">¶</a></dt>
+<dd><p>Similar to the <tt class="docutils literal"><span class="pre">issubclass</span></tt> builtin, but does not raise a <tt class="docutils literal"><span class="pre">TypeError</span></tt>
+if either <tt class="docutils literal"><span class="pre">o</span></tt> or <tt class="docutils literal"><span class="pre">bases</span></tt> is not an instance of <tt class="docutils literal"><span class="pre">type</span></tt>.</p>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">is_subclass</span><span class="p">(</span><span class="ne">IOError</span><span class="p">,</span> <span class="ne">Exception</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">is_subclass</span><span class="p">(</span><span class="ne">Exception</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">is_subclass</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="ne">Exception</span><span class="p">)</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">is_subclass</span><span class="p">(</span><span class="ne">IOError</span><span class="p">,</span> <span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="ne">Exception</span><span class="p">))</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">is_subclass</span><span class="p">(</span><span class="ne">Exception</span><span class="p">,</span> <span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="mi">42</span><span class="p">))</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="module-unstdlib.standard">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-unstdlib.standard" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">unstdlib.standard package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-unstdlib.standard.collections_">unstdlib.standard.collections_ module</a></li>
+<li><a class="reference internal" href="#module-unstdlib.standard.contextlib_">unstdlib.standard.contextlib_ module</a></li>
+<li><a class="reference internal" href="#module-unstdlib.standard.datetime_">unstdlib.standard.datetime_ module</a></li>
+<li><a class="reference internal" href="#module-unstdlib.standard.dict_">unstdlib.standard.dict_ module</a></li>
+<li><a class="reference internal" href="#module-unstdlib.standard.exception_">unstdlib.standard.exception_ module</a></li>
+<li><a class="reference internal" href="#module-unstdlib.standard.functools_">unstdlib.standard.functools_ module</a></li>
+<li><a class="reference internal" href="#module-unstdlib.standard.list_">unstdlib.standard.list_ module</a></li>
+<li><a class="reference internal" href="#module-unstdlib.standard.os_">unstdlib.standard.os_ module</a></li>
+<li><a class="reference internal" href="#module-unstdlib.standard.random_">unstdlib.standard.random_ module</a></li>
+<li><a class="reference internal" href="#module-unstdlib.standard.string_">unstdlib.standard.string_ module</a></li>
+<li><a class="reference internal" href="#module-unstdlib.standard.type_">unstdlib.standard.type_ module</a></li>
+<li><a class="reference internal" href="#module-unstdlib.standard">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="unstdlib.html"
+                        title="previous chapter">unstdlib package</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/unstdlib.standard.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="unstdlib.html" title="unstdlib package"
+             >previous</a> |</li>
+        <li><a href="index.html">unstdlib 1.6.1 documentation</a> &raquo;</li>
+          <li><a href="unstdlib.html" >unstdlib package</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Andrey Petrov and David Wolever.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

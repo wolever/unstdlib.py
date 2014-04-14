@@ -1,0 +1,522 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>unstdlib.standard.string_ &mdash; unstdlib 1.6.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '1.6.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="unstdlib 1.6.1 documentation" href="../../../index.html" />
+    <link rel="up" title="Module code" href="../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">unstdlib 1.6.1 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for unstdlib.standard.string_</h1><div class="highlight"><pre>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">string</span>
+<span class="kn">import</span> <span class="nn">unicodedata</span>
+
+<span class="kn">from</span> <span class="nn">unstdlib.six</span> <span class="kn">import</span> <span class="n">text_type</span><span class="p">,</span> <span class="n">PY3</span><span class="p">,</span> <span class="n">string_types</span><span class="p">,</span> <span class="n">binary_type</span><span class="p">,</span> <span class="n">u</span>
+<span class="kn">from</span> <span class="nn">unstdlib.six.moves</span> <span class="kn">import</span> <span class="nb">xrange</span>
+
+<span class="k">if</span> <span class="n">PY3</span><span class="p">:</span>
+    <span class="n">text_type_magicmethod</span> <span class="o">=</span> <span class="s">&quot;__str__&quot;</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">text_type_magicmethod</span> <span class="o">=</span> <span class="s">&quot;__unicode__&quot;</span>
+
+<span class="kn">from</span> <span class="nn">.random_</span> <span class="kn">import</span> <span class="n">random</span>
+
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s">&#39;random_string&#39;</span><span class="p">,</span>
+    <span class="s">&#39;number_to_string&#39;</span><span class="p">,</span> <span class="s">&#39;string_to_number&#39;</span><span class="p">,</span> <span class="s">&#39;number_to_bytes&#39;</span><span class="p">,</span> <span class="s">&#39;bytes_to_number&#39;</span><span class="p">,</span>
+    <span class="s">&#39;dollars_to_cents&#39;</span><span class="p">,</span>
+    <span class="s">&#39;to_str&#39;</span><span class="p">,</span> <span class="s">&#39;to_unicode&#39;</span><span class="p">,</span> <span class="s">&#39;to_int&#39;</span><span class="p">,</span> <span class="s">&#39;to_float&#39;</span><span class="p">,</span>
+    <span class="s">&#39;format_int&#39;</span><span class="p">,</span>
+    <span class="s">&#39;slugify&#39;</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="k">class</span> <span class="nc">r</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A normalized repr for bytes/unicode between Python2 and Python3.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">val</span> <span class="o">=</span> <span class="n">val</span>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">PY3</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">val</span><span class="p">,</span> <span class="n">text_type</span><span class="p">):</span>
+                <span class="k">return</span> <span class="s">&#39;u&#39;</span> <span class="o">+</span> <span class="nb">repr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">val</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">val</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                <span class="k">return</span> <span class="s">&#39;b&#39;</span> <span class="o">+</span> <span class="nb">repr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">val</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">repr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">val</span><span class="p">)</span>
+
+
+<span class="n">_Default</span> <span class="o">=</span> <span class="nb">object</span><span class="p">()</span>
+
+<div class="viewcode-block" id="random_string"><a class="viewcode-back" href="../../../unstdlib.standard.html#unstdlib.standard.string_.random_string">[docs]</a><span class="k">def</span> <span class="nf">random_string</span><span class="p">(</span><span class="n">length</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">alphabet</span><span class="o">=</span><span class="n">string</span><span class="o">.</span><span class="n">ascii_letters</span><span class="o">+</span><span class="n">string</span><span class="o">.</span><span class="n">digits</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return a random string of given length and alphabet.</span>
+
+<span class="sd">    Default alphabet is url-friendly (base62).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="s">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">alphabet</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="n">length</span><span class="p">)])</span>
+
+</div>
+<div class="viewcode-block" id="number_to_string"><a class="viewcode-back" href="../../../unstdlib.standard.html#unstdlib.standard.string_.number_to_string">[docs]</a><span class="k">def</span> <span class="nf">number_to_string</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">alphabet</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Given an non-negative integer ``n``, convert it to a string composed of</span>
+<span class="sd">    the given ``alphabet`` mapping, where the position of each element in</span>
+<span class="sd">    ``alphabet`` is its radix value.</span>
+
+<span class="sd">    Examples::</span>
+
+<span class="sd">        &gt;&gt;&gt; number_to_string(12345678, &#39;01&#39;)</span>
+<span class="sd">        &#39;101111000110000101001110&#39;</span>
+
+<span class="sd">        &gt;&gt;&gt; number_to_string(12345678, &#39;ab&#39;)</span>
+<span class="sd">        &#39;babbbbaaabbaaaababaabbba&#39;</span>
+
+<span class="sd">        &gt;&gt;&gt; number_to_string(12345678, string.ascii_letters + string.digits)</span>
+<span class="sd">        &#39;ZXP0&#39;</span>
+
+<span class="sd">        &gt;&gt;&gt; number_to_string(12345, [&#39;zero &#39;, &#39;one &#39;, &#39;two &#39;, &#39;three &#39;, &#39;four &#39;, &#39;five &#39;, &#39;six &#39;, &#39;seven &#39;, &#39;eight &#39;, &#39;nine &#39;])</span>
+<span class="sd">        &#39;one two three four five &#39;</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+    <span class="n">base</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">alphabet</span><span class="p">)</span>
+    <span class="n">current</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">current</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;invalid n (must be non-negative): </span><span class="si">%s</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+    <span class="k">while</span> <span class="n">current</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">alphabet</span><span class="p">[</span><span class="n">current</span> <span class="o">%</span> <span class="n">base</span><span class="p">]</span> <span class="o">+</span> <span class="n">result</span>
+        <span class="n">current</span> <span class="o">=</span> <span class="n">current</span> <span class="o">//</span> <span class="n">base</span>
+
+    <span class="k">return</span> <span class="n">result</span>
+
+</div>
+<div class="viewcode-block" id="string_to_number"><a class="viewcode-back" href="../../../unstdlib.standard.html#unstdlib.standard.string_.string_to_number">[docs]</a><span class="k">def</span> <span class="nf">string_to_number</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">alphabet</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Given a string ``s``, convert it to an integer composed of the given</span>
+<span class="sd">    ``alphabet`` mapping, where the position of each element in ``alphabet`` is</span>
+<span class="sd">    its radix value.</span>
+
+<span class="sd">    Examples::</span>
+
+<span class="sd">        &gt;&gt;&gt; string_to_number(&#39;101111000110000101001110&#39;, &#39;01&#39;)</span>
+<span class="sd">        12345678</span>
+
+<span class="sd">        &gt;&gt;&gt; string_to_number(&#39;babbbbaaabbaaaababaabbba&#39;, &#39;ab&#39;)</span>
+<span class="sd">        12345678</span>
+
+<span class="sd">        &gt;&gt;&gt; string_to_number(&#39;ZXP0&#39;, string.ascii_letters + string.digits)</span>
+<span class="sd">        12345678</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">base</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">alphabet</span><span class="p">)</span>
+    <span class="n">inverse_alphabet</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">alphabet</span><span class="p">,</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">base</span><span class="p">)))</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">exp</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+        <span class="n">n</span> <span class="o">+=</span> <span class="n">inverse_alphabet</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">base</span> <span class="o">**</span> <span class="n">exp</span><span class="p">)</span>
+        <span class="n">exp</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">return</span> <span class="n">n</span>
+
+</div>
+<div class="viewcode-block" id="bytes_to_number"><a class="viewcode-back" href="../../../unstdlib.standard.html#unstdlib.standard.string_.bytes_to_number">[docs]</a><span class="k">def</span> <span class="nf">bytes_to_number</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">endian</span><span class="o">=</span><span class="s">&#39;big&#39;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert a string to an integer.</span>
+
+<span class="sd">    :param b:</span>
+<span class="sd">        String or bytearray to convert.</span>
+
+<span class="sd">    :param endian:</span>
+<span class="sd">        Byte order to convert into (&#39;big&#39; or &#39;little&#39; endian-ness, default</span>
+<span class="sd">        &#39;big&#39;)</span>
+
+<span class="sd">    Assumes bytes are 8 bits.</span>
+
+<span class="sd">    This is a special-case version of string_to_number with a full base-256</span>
+<span class="sd">    ASCII alphabet. It is the reverse of ``number_to_bytes(n)``.</span>
+
+<span class="sd">    Examples::</span>
+
+<span class="sd">        &gt;&gt;&gt; bytes_to_number(b&#39;*&#39;)</span>
+<span class="sd">        42</span>
+<span class="sd">        &gt;&gt;&gt; bytes_to_number(b&#39;\\xff&#39;)</span>
+<span class="sd">        255</span>
+<span class="sd">        &gt;&gt;&gt; bytes_to_number(b&#39;\\x01\\x00&#39;)</span>
+<span class="sd">        256</span>
+<span class="sd">        &gt;&gt;&gt; bytes_to_number(b&#39;\\x00\\x01&#39;, endian=&#39;little&#39;)</span>
+<span class="sd">        256</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">endian</span> <span class="o">==</span> <span class="s">&#39;big&#39;</span><span class="p">:</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+
+    <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">ch</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">bytearray</span><span class="p">(</span><span class="n">b</span><span class="p">)):</span>
+        <span class="n">n</span> <span class="o">^=</span> <span class="n">ch</span> <span class="o">&lt;&lt;</span> <span class="n">i</span> <span class="o">*</span> <span class="mi">8</span>
+
+    <span class="k">return</span> <span class="n">n</span>
+
+</div>
+<div class="viewcode-block" id="number_to_bytes"><a class="viewcode-back" href="../../../unstdlib.standard.html#unstdlib.standard.string_.number_to_bytes">[docs]</a><span class="k">def</span> <span class="nf">number_to_bytes</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">endian</span><span class="o">=</span><span class="s">&#39;big&#39;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert an integer to a corresponding string of bytes..</span>
+
+<span class="sd">    :param n:</span>
+<span class="sd">        Integer to convert.</span>
+
+<span class="sd">    :param endian:</span>
+<span class="sd">        Byte order to convert into (&#39;big&#39; or &#39;little&#39; endian-ness, default</span>
+<span class="sd">        &#39;big&#39;)</span>
+
+<span class="sd">    Assumes bytes are 8 bits.</span>
+
+<span class="sd">    This is a special-case version of number_to_string with a full base-256</span>
+<span class="sd">    ASCII alphabet. It is the reverse of ``bytes_to_number(b)``.</span>
+
+<span class="sd">    Examples::</span>
+
+<span class="sd">        &gt;&gt;&gt; r(number_to_bytes(42))</span>
+<span class="sd">        b&#39;*&#39;</span>
+<span class="sd">        &gt;&gt;&gt; r(number_to_bytes(255))</span>
+<span class="sd">        b&#39;\\xff&#39;</span>
+<span class="sd">        &gt;&gt;&gt; r(number_to_bytes(256))</span>
+<span class="sd">        b&#39;\\x01\\x00&#39;</span>
+<span class="sd">        &gt;&gt;&gt; r(number_to_bytes(256, endian=&#39;little&#39;))</span>
+<span class="sd">        b&#39;\\x00\\x01&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">while</span> <span class="n">n</span><span class="p">:</span>
+        <span class="n">n</span><span class="p">,</span> <span class="n">ch</span> <span class="o">=</span> <span class="nb">divmod</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">256</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">PY3</span><span class="p">:</span>
+            <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ch</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">chr</span><span class="p">(</span><span class="n">ch</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="n">endian</span> <span class="o">==</span> <span class="s">&#39;big&#39;</span><span class="p">:</span>
+        <span class="n">res</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">PY3</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">bytes</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+
+</div>
+<div class="viewcode-block" id="to_str"><a class="viewcode-back" href="../../../unstdlib.standard.html#unstdlib.standard.string_.to_str">[docs]</a><span class="k">def</span> <span class="nf">to_str</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s">&#39;utf-8&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">encode_args</span><span class="p">):</span>
+    <span class="sd">r&quot;&quot;&quot;</span>
+<span class="sd">    Returns a ``str`` of ``obj``, encoding using ``encoding`` if necessary. For</span>
+<span class="sd">    example::</span>
+
+<span class="sd">        &gt;&gt;&gt; some_str = b&quot;\xff&quot;</span>
+<span class="sd">        &gt;&gt;&gt; some_unicode = u&quot;\u1234&quot;</span>
+<span class="sd">        &gt;&gt;&gt; some_exception = Exception(u&#39;Error: &#39; + some_unicode)</span>
+<span class="sd">        &gt;&gt;&gt; r(to_str(some_str))</span>
+<span class="sd">        b&#39;\xff&#39;</span>
+<span class="sd">        &gt;&gt;&gt; r(to_str(some_unicode))</span>
+<span class="sd">        b&#39;\xe1\x88\xb4&#39;</span>
+<span class="sd">        &gt;&gt;&gt; r(to_str(some_exception))</span>
+<span class="sd">        b&#39;Error: \xe1\x88\xb4&#39;</span>
+<span class="sd">        &gt;&gt;&gt; r(to_str([42]))</span>
+<span class="sd">        b&#39;[42]&#39;</span>
+
+<span class="sd">    See source code for detailed semantics.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c"># Note: On py3, ``b&#39;x&#39;.__str__()`` returns ``&quot;b&#39;x&#39;&quot;``, so we need to do the</span>
+    <span class="c"># explicit check first.</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">binary_type</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">obj</span>
+
+    <span class="c"># We coerce to unicode if &#39;__unicode__&#39; is available because there is no</span>
+    <span class="c"># way to specify encoding when calling ``str(obj)``, so, eg,</span>
+    <span class="c"># ``str(Exception(u&#39;\u1234&#39;))`` will explode.</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">text_type</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">text_type_magicmethod</span><span class="p">):</span>
+        <span class="c"># Note: unicode(u&#39;foo&#39;) is O(1) (by experimentation)</span>
+        <span class="k">return</span> <span class="n">text_type</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">encoding</span><span class="p">,</span> <span class="o">**</span><span class="n">encode_args</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">binary_type</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+
+</div>
+<div class="viewcode-block" id="to_unicode"><a class="viewcode-back" href="../../../unstdlib.standard.html#unstdlib.standard.string_.to_unicode">[docs]</a><span class="k">def</span> <span class="nf">to_unicode</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s">&#39;utf-8&#39;</span><span class="p">,</span> <span class="n">fallback</span><span class="o">=</span><span class="s">&#39;latin1&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">decode_args</span><span class="p">):</span>
+    <span class="sd">r&quot;&quot;&quot;</span>
+<span class="sd">    Returns a ``unicode`` of ``obj``, decoding using ``encoding`` if necessary.</span>
+<span class="sd">    If decoding fails, the ``fallback`` encoding (default ``latin1``) is used.</span>
+
+<span class="sd">    Examples::</span>
+
+<span class="sd">        &gt;&gt;&gt; r(to_unicode(b&#39;\xe1\x88\xb4&#39;))</span>
+<span class="sd">        u&#39;\u1234&#39;</span>
+<span class="sd">        &gt;&gt;&gt; r(to_unicode(b&#39;\xff&#39;))</span>
+<span class="sd">        u&#39;\xff&#39;</span>
+<span class="sd">        &gt;&gt;&gt; r(to_unicode(u&#39;\u1234&#39;))</span>
+<span class="sd">        u&#39;\u1234&#39;</span>
+<span class="sd">        &gt;&gt;&gt; r(to_unicode(Exception(u&#39;\u1234&#39;)))</span>
+<span class="sd">        u&#39;\u1234&#39;</span>
+<span class="sd">        &gt;&gt;&gt; r(to_unicode([42]))</span>
+<span class="sd">        u&#39;[42]&#39;</span>
+
+<span class="sd">    See source code for detailed semantics.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c"># Note: on py3, the `bytes` type defines an unhelpful &quot;__str__&quot; function,</span>
+    <span class="c"># so we need to do this check (see comments in ``to_str``).</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">binary_type</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">text_type</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">text_type_magicmethod</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">text_type</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+
+        <span class="n">obj_str</span> <span class="o">=</span> <span class="n">binary_type</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">obj_str</span> <span class="o">=</span> <span class="n">obj</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">text_type</span><span class="p">(</span><span class="n">obj_str</span><span class="p">,</span> <span class="n">encoding</span><span class="p">,</span> <span class="o">**</span><span class="n">decode_args</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">UnicodeDecodeError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">text_type</span><span class="p">(</span><span class="n">obj_str</span><span class="p">,</span> <span class="n">fallback</span><span class="p">,</span> <span class="o">**</span><span class="n">decode_args</span><span class="p">)</span>
+
+</div>
+<div class="viewcode-block" id="to_int"><a class="viewcode-back" href="../../../unstdlib.standard.html#unstdlib.standard.string_.to_int">[docs]</a><span class="k">def</span> <span class="nf">to_int</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return input converted into an integer. If failed, then return ``default``.</span>
+
+<span class="sd">    Examples::</span>
+
+<span class="sd">        &gt;&gt;&gt; to_int(&#39;1&#39;)</span>
+<span class="sd">        1</span>
+<span class="sd">        &gt;&gt;&gt; to_int(1)</span>
+<span class="sd">        1</span>
+<span class="sd">        &gt;&gt;&gt; to_int(&#39;&#39;)</span>
+<span class="sd">        0</span>
+<span class="sd">        &gt;&gt;&gt; to_int(None)</span>
+<span class="sd">        0</span>
+<span class="sd">        &gt;&gt;&gt; to_int(0, default=&#39;Empty&#39;)</span>
+<span class="sd">        0</span>
+<span class="sd">        &gt;&gt;&gt; to_int(None, default=&#39;Empty&#39;)</span>
+<span class="sd">        &#39;Empty&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+    <span class="k">except</span> <span class="p">(</span><span class="ne">TypeError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">default</span>
+
+</div>
+<span class="n">_infs</span><span class="o">=</span><span class="nb">set</span><span class="p">([</span><span class="nb">float</span><span class="p">(</span><span class="s">&quot;inf&quot;</span><span class="p">),</span> <span class="nb">float</span><span class="p">(</span><span class="s">&quot;-inf&quot;</span><span class="p">)])</span>
+
+<div class="viewcode-block" id="to_float"><a class="viewcode-back" href="../../../unstdlib.standard.html#unstdlib.standard.string_.to_float">[docs]</a><span class="k">def</span> <span class="nf">to_float</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">allow_nan</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return input converted into a float. If failed, then return ``default``.</span>
+
+<span class="sd">    Note that, by default, ``allow_nan=False``, so ``to_float`` will not return</span>
+<span class="sd">    ``nan``, ``inf``, or ``-inf``.</span>
+
+<span class="sd">    Examples::</span>
+
+<span class="sd">        &gt;&gt;&gt; to_float(&#39;1.5&#39;)</span>
+<span class="sd">        1.5</span>
+<span class="sd">        &gt;&gt;&gt; to_float(1)</span>
+<span class="sd">        1.0</span>
+<span class="sd">        &gt;&gt;&gt; to_float(&#39;&#39;)</span>
+<span class="sd">        0.0</span>
+<span class="sd">        &gt;&gt;&gt; to_float(&#39;nan&#39;)</span>
+<span class="sd">        0.0</span>
+<span class="sd">        &gt;&gt;&gt; to_float(&#39;inf&#39;)</span>
+<span class="sd">        0.0</span>
+<span class="sd">        &gt;&gt;&gt; to_float(&#39;-inf&#39;, allow_nan=True)</span>
+<span class="sd">        -inf</span>
+<span class="sd">        &gt;&gt;&gt; to_float(None)</span>
+<span class="sd">        0.0</span>
+<span class="sd">        &gt;&gt;&gt; to_float(0, default=&#39;Empty&#39;)</span>
+<span class="sd">        0.0</span>
+<span class="sd">        &gt;&gt;&gt; to_float(None, default=&#39;Empty&#39;)</span>
+<span class="sd">        &#39;Empty&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+    <span class="k">except</span> <span class="p">(</span><span class="ne">TypeError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">default</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">allow_nan</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">f</span> <span class="o">!=</span> <span class="n">f</span> <span class="ow">or</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">_infs</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">default</span>
+    <span class="k">return</span> <span class="n">f</span>
+
+</div>
+<div class="viewcode-block" id="format_int"><a class="viewcode-back" href="../../../unstdlib.standard.html#unstdlib.standard.string_.format_int">[docs]</a><span class="k">def</span> <span class="nf">format_int</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">singular</span><span class="o">=</span><span class="n">_Default</span><span class="p">,</span> <span class="n">plural</span><span class="o">=</span><span class="n">_Default</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return `singular.format(n)` if n is 1, or `plural.format(n)` otherwise. If</span>
+<span class="sd">    plural is not specified, then it is assumed to be same as singular but</span>
+<span class="sd">    suffixed with an &#39;s&#39;.</span>
+
+<span class="sd">    :param n:</span>
+<span class="sd">        Integer which determines pluralness.</span>
+
+<span class="sd">    :param singular:</span>
+<span class="sd">        String with a format() placeholder for n. (Default: `u&quot;{:,}&quot;`)</span>
+
+<span class="sd">    :param plural:</span>
+<span class="sd">        String with a format() placeholder for n. (Default: If singular is not</span>
+<span class="sd">        default, then it&#39;s `singular + u&quot;s&quot;`. Otherwise it&#39;s same as singular.)</span>
+
+<span class="sd">    Example: ::</span>
+
+<span class="sd">        &gt;&gt;&gt; r(format_int(1000))</span>
+<span class="sd">        u&#39;1,000&#39;</span>
+<span class="sd">        &gt;&gt;&gt; r(format_int(1, u&quot;{} day&quot;))</span>
+<span class="sd">        u&#39;1 day&#39;</span>
+<span class="sd">        &gt;&gt;&gt; r(format_int(2, u&quot;{} day&quot;))</span>
+<span class="sd">        u&#39;2 days&#39;</span>
+<span class="sd">        &gt;&gt;&gt; r(format_int(2, u&quot;{} box&quot;, u&quot;{} boxen&quot;))</span>
+<span class="sd">        u&#39;2 boxen&#39;</span>
+<span class="sd">        &gt;&gt;&gt; r(format_int(20000, u&quot;{:,} box&quot;, u&quot;{:,} boxen&quot;))</span>
+<span class="sd">        u&#39;20,000 boxen&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">singular</span> <span class="ow">in</span> <span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="n">_Default</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">plural</span> <span class="ow">is</span> <span class="n">_Default</span><span class="p">:</span>
+            <span class="n">plural</span> <span class="o">=</span> <span class="bp">None</span>
+
+        <span class="n">singular</span> <span class="o">=</span> <span class="s">u&#39;{:,}&#39;</span>
+
+    <span class="k">elif</span> <span class="n">plural</span> <span class="ow">is</span> <span class="n">_Default</span><span class="p">:</span>
+        <span class="n">plural</span> <span class="o">=</span> <span class="n">singular</span> <span class="o">+</span> <span class="s">u&#39;s&#39;</span>
+
+    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">plural</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">singular</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">plural</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+
+
+</div>
+<span class="n">RE_NUMBER</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s">r&#39;[\d\.\-eE]+&#39;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="dollars_to_cents"><a class="viewcode-back" href="../../../unstdlib.standard.html#unstdlib.standard.string_.dollars_to_cents">[docs]</a><span class="k">def</span> <span class="nf">dollars_to_cents</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">allow_negative</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Given a string or integer representing dollars, return an integer of</span>
+<span class="sd">    equivalent cents, in an input-resilient way.</span>
+<span class="sd">    </span>
+<span class="sd">    This works by stripping any non-numeric characters before attempting to</span>
+<span class="sd">    cast the value.</span>
+
+<span class="sd">    Examples::</span>
+
+<span class="sd">        &gt;&gt;&gt; dollars_to_cents(&#39;$1&#39;)</span>
+<span class="sd">        100</span>
+<span class="sd">        &gt;&gt;&gt; dollars_to_cents(&#39;1&#39;)</span>
+<span class="sd">        100</span>
+<span class="sd">        &gt;&gt;&gt; dollars_to_cents(1)</span>
+<span class="sd">        100</span>
+<span class="sd">        &gt;&gt;&gt; dollars_to_cents(&#39;1e2&#39;)</span>
+<span class="sd">        10000</span>
+<span class="sd">        &gt;&gt;&gt; dollars_to_cents(&#39;-1$&#39;, allow_negative=True)</span>
+<span class="sd">        -100</span>
+<span class="sd">        &gt;&gt;&gt; dollars_to_cents(&#39;1 dollar&#39;)</span>
+<span class="sd">        100</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c"># TODO: Implement cents_to_dollars</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">s</span><span class="p">:</span>
+        <span class="k">return</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">string_types</span><span class="p">):</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="s">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">RE_NUMBER</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>
+
+    <span class="n">dollars</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span><span class="p">))</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">allow_negative</span> <span class="ow">and</span> <span class="n">dollars</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;Negative values not permitted.&#39;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">dollars</span>
+
+</div>
+<span class="n">RE_SLUG</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s">r&#39;\W+&#39;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="slugify"><a class="viewcode-back" href="../../../unstdlib.standard.html#unstdlib.standard.string_.slugify">[docs]</a><span class="k">def</span> <span class="nf">slugify</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s">&#39;-&#39;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Normalize `s` into ASCII and replace non-word characters with `delimiter`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">unicodedata</span><span class="o">.</span><span class="n">normalize</span><span class="p">(</span><span class="s">&#39;NFKD&#39;</span><span class="p">,</span> <span class="n">to_unicode</span><span class="p">(</span><span class="n">s</span><span class="p">))</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">&#39;ascii&#39;</span><span class="p">,</span> <span class="s">&#39;ignore&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s">&#39;ascii&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">RE_SLUG</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">delimiter</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="n">delimiter</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+
+</div>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">doctest</span>
+    <span class="n">doctest</span><span class="o">.</span><span class="n">testmod</span><span class="p">(</span><span class="n">optionflags</span><span class="o">=</span><span class="n">doctest</span><span class="o">.</span><span class="n">ELLIPSIS</span><span class="p">)</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">unstdlib 1.6.1 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Andrey Petrov and David Wolever.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>
