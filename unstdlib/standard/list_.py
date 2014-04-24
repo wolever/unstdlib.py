@@ -112,11 +112,42 @@ def iterate_chunks(i, size=10):
     Iterate over an iterator ``i`` in ``size`` chunks, yield chunks.
     Similar to pagination.
 
+    Slices will be returned when the input is sliceable, otherwise
+    lists of items will be returned.
+
     Example::
 
         >>> list(iterate_chunks([1, 2, 3, 4], size=2))
         [[1, 2], [3, 4]]
+        >>> list(iterate_chunks("abc123", size=3))
+        ["abc", "123"]
+        >>> list(iterate_chunks(xrange(4), size=2))
+    	[[0, 1], [2, 3]]
+
     """
+    if hasattr(i, "__getitem__"):
+        res = _itereate_chunks_sliceable(i, size, _peek_first=True)
+        try:
+            res.next()
+            return res
+        except TypeError:
+            pass
+    return _iterate_chunks_iterator(i, size)
+
+def _itereate_chunks_sliceable(i, size, _peek_first):
+    stop = len(i)
+    cur = 0
+    while cur < stop:
+        end = min(cur + size, stop)
+        chunk = i[cur:end]
+        if _peek_first:
+            _peek_first = False
+            yield chunk
+        yield chunk
+        cur = end
+
+
+def _iterate_chunks_iterator(i, size):
     accumulator = []
 
     for n, i in enumerate(i):
